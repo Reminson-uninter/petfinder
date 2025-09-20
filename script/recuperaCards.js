@@ -92,25 +92,14 @@ function autenticarAcao(acao, id) {
   } else if (acao === 'excluir') {
     if (!confirm("Tem certeza que deseja excluir este pet?")) return;
 
-    const novaLista = listaPets.filter(p => p.id !== id);
+    const novaLista = listaPets.filter(p => p.id.toString() !== id.toString());
     localStorage.setItem('pets', JSON.stringify(novaLista));
     alert("Pet excluído com sucesso!");
     exibirPets();
   }
 }
 
-function limparDados() {
-  if (!confirm("Tem certeza que deseja apagar todos os dados? Esta ação não pode ser desfeita.")) return;
-
-  localStorage.removeItem('pets');
-  localStorage.removeItem('petEditId');
-
-  alert("Todos os dados foram apagados com sucesso.");
-
-  const container = document.querySelector('.container-cards');
-  container.innerHTML = '<p>Todos os dados foram apagados.</p>';
-}
-
 window.addEventListener('DOMContentLoaded', exibirPets);
+
 
 
