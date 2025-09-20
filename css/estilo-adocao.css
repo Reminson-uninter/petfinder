@@ -1,0 +1,192 @@
+    header {
+      background-color: #ff751a;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      font-family: 'Fredoka One', sans-serif;
+      color: white;
+      font-size: 2.5rem;
+    }
+
+    /* Menu hamburguer */
+    .hamburger {
+      cursor: pointer;
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      border-radius: 2px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      font-family: 'Fredoka One', sans-serif;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #ffd699;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+nav a:hover {
+  color: #ffd699;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 5px 10px;
+  border-radius: 5px;
+   transition: color 0.3s ease, background-color 0.3s ease;
+}
+button:focus-visible,
+nav a:focus-visible {
+  outline: 2px solid #ffd699;
+  outline-offset: 4px;
+}
+main {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 40px 20px;
+  background-color: #fff8f0;
+  color: #333;
+}
+
+
+/* Galeria de Adoção */
+.galeria-adocao h1 {
+  text-align: center;
+  font-size: 2.5em;
+  color: #ff914d;
+  margin-bottom: 30px;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.animal-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border: 2px solid #ff914d;
+  border-radius: 12px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.animal-card:hover {
+  transform: scale(1.05);
+}
+
+.animal-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.info {
+  padding: 15px;
+}
+
+.info h3 {
+  margin-top: 0;
+  color: #ff914d;
+}
+
+.adopt-btn {
+  background-color: #ff914d;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.adopt-btn:hover {
+  background-color: #e6762f;
+}
+
+/* Regras de Adoção */
+.rules {
+  margin-top: 60px;
+  background-color: #ffe1cc;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rules h2 {
+  text-align: center;
+  color: #d35400;
+  margin-bottom: 20px;
+}
+
+.rules ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  font-size: 1.1em;
+}
+
+.rules li {
+  margin-bottom: 10px;
+}
+#foto-pet{
+  width: 150px;
+  height: 150px;
+  border-radius: 10%;
+  margin: 5px;
+  object-fit: cover;
+  border: 1px solid #ff751a;
+}
+
+/* Menu padrão escondido em telas pequenas */
+@media (max-width: 768px) {
+  #nav-menu {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  #nav-menu.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+  }
+}

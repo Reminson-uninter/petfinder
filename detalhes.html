@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalhes do Pet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="" />
+  <style>
+    /* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* Corpo */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+
+    /* Cabeçalho */
+    header {
+      position: fixed;
+      background-color: #ff751a;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      top: 0;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      font-family: 'Fredoka One', sans-serif;
+      color: white;
+      font-size: 2.5rem;
+    }
+
+    /* Menu hamburguer */
+    .hamburger {
+      cursor: pointer;
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      border-radius: 2px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      font-family: 'Fredoka One', sans-serif;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #ffd699;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+nav a:hover {
+  color: #ffd699;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 5px 10px;
+  border-radius: 5px;
+   transition: color 0.3s ease, background-color 0.3s ease;
+}
+    
+    .detalhes-container {
+      max-width: 500px;
+      margin: 150px auto 40px auto;
+      background-color: #fff;
+      padding: 0px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .detalhes-container img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .detalhes-container h2 {
+      margin-top: 15px;
+      font-size: 28px;
+      color: #333;
+    }
+    .detalhes-container p {
+      margin: 8px 0;
+      font-size: 16px;
+    }
+    .voltar-btn {
+      margin-top: 40px;
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+   <header>
+    <h1>🐾 PetFinder</h1>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="Index.html">Página Inicial</a></li>
+        <li><a href="animais_encontra.html">Encontrados</a></li>
+        <li><a href="adocao.html" target="_blank">Adoção</a></li>
+        <li><a href="">Dicas</a></li>
+        <li><a href="cadastrados.html">Cadastrados</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="detalhes-container" id="detalhesPet">
+      <!-- Conteúdo será inserido via JavaScript -->
+    </div>
+  </main>
+  <footer style="background-color: #ff751a; color: white; padding: 30px 0; font-family: 'Segoe UI', sans-serif;">
+  <div style="max-width: 1000px; margin: auto; text-align: center;">
+    <h3 style="margin-bottom: 10px;">🐶 PetFinder</h3>
+    <p style="margin-bottom: 20px;">Conectando pets incríveis a lares amorosos 💕</p>
+    
+    <div style="margin-bottom: 20px;">
+      <a href="https://www.instagram.com/seuusuario" target="_blank" style="margin: 0 15px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="32" height="32">
+      </a>
+      <a href="https://www.facebook.com/seuusuario" target="_blank" style="margin: 0 15px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="32" height="32">
+      </a>
+    </div>
+
+    <nav style="margin-bottom: 15px;">
+      <a href="Index.html" style="color: white; margin: 0 10px; text-decoration: none;">Página Inicial</a> |
+      <a href="adocao.html" style="color: white; margin: 0 10px; text-decoration: none;">Adoção</a> |
+      <a href="dicas.html" style="color: white; margin: 0 10px; text-decoration: none;">Cuidados</a> |
+      <a href="contato.html" style="color: white; margin: 0 10px; text-decoration: none;">Contato</a>
+    </nav>
+
+    <p style="font-size: 14px;">© 2025 PetFinder. Todos os direitos reservados.</p>
+  </div>
+</footer>
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav-menu');
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+    const urlParams = new URLSearchParams(window.location.search);
+    const petId = urlParams.get('id');
+    const listaPets = JSON.parse(localStorage.getItem('pets')) || [];
+    const pet = listaPets.find(p => p.id == petId);
+
+    const container = document.getElementById('detalhesPet');
+
+    if (pet) {
+      container.innerHTML = `
+        <img src="${pet.imagem}" alt="Imagem de ${pet.nome}">
+        <h2>${pet.nome}</h2>
+        <p><strong>ID:</strong> ${pet.id}</p>
+        <p><strong>Raça:</strong> ${pet.raca}</p>
+        <p><strong>Sexo:</strong> ${pet.sexo || 'Indefinido'}</p>
+          <p><strong>Idade:</strong> ${pet.idade || 'Não informada'}</p>
+        <p><strong>Localização:</strong> ${pet.localiza}</p>
+        <p><strong>Data:</strong> ${pet.data}</p>
+        <p><strong>Contato:</strong> ${pet.contato}</p>
+        <p><strong>Descrição:</strong> ${pet.descricao || 'Sem descrição disponível.'}</p>
+        <a href="Index.html" class="voltar-btn">← Voltar</a>
+      `;
+    } else {
+      container.innerHTML = `
+        <p>Pet não encontrado. Volte à página anterior e tente novamente.</p>
+        <a href="Index.html" class="voltar-btn">← Voltar</a>
+      `;
+    }
+  </script>
+
+</body>
+</html>

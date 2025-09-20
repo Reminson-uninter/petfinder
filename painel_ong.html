@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel da ONG - PetFinder</title>
+  <link rel="stylesheet" href="css/painel_ong.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #ff914d;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 40px;
+    }
+
+    label {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      background-color: #ff914d;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #e67e22;
+    }
+
+    .section-divider {
+      border-top: 2px solid #eee;
+      margin: 40px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🐾 Painel da ONG</h1>
+    <p>Gerencie seus pets e campanhas diretamente por aqui</p>
+  </header>
+
+  <main>
+    <!-- Cadastro de Pet -->
+    <section>
+      <h2>Cadastrar Pet para Adoção</h2>
+      <form id="cadastroPet">
+        <label for="nomePet">Nome do Pet:</label>
+        <input type="text" id="nomePet" name="nomePet" required />
+
+        <label for="idadePet">Idade:</label>
+        <input type="text" id="idadePet" name="idadePet" required />
+
+        <label for="portePet">Porte:</label>
+        <select id="portePet" name="portePet" required>
+          <option value="">Selecione</option>
+          <option value="pequeno">Pequeno</option>
+          <option value="médio">Médio</option>
+          <option value="grande">Grande</option>
+        </select>
+
+        <label for="descricaoPet">Descrição:</label>
+        <textarea id="descricaoPet" name="descricaoPet" rows="4" required></textarea>
+
+        <label for="fotoPet">URL da Foto:</label>
+        <input type="FILE" id="fotoPet" name="fotoPet"  required />
+
+        <button type="submit">Cadastrar Pet</button>
+      </form>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Publicação de Campanha -->
+    <section>
+      <h2>Publicar Campanha</h2>
+      <form id="cadastroCampanha">
+        <label for="tituloCampanha">Título da Campanha:</label>
+        <input type="text" id="tituloCampanha" name="tituloCampanha" required />
+
+        <label for="descricaoCampanha">Descrição:</label>
+        <textarea id="descricaoCampanha" name="descricaoCampanha" rows="4" required></textarea>
+
+        <label for="dataCampanha">Data do Evento (se houver):</label>
+        <input type="date" id="dataCampanha" name="dataCampanha" />
+        
+          <label for="fotoPet">URL da Foto da Campanha:</label>
+        <input type="FILE" id="fotoPet" name="fotoPet"  required />
+
+        <button type="submit">Publicar Campanha</button>
+      </form>
+    </section>
+  </main>
+   <footer style="background-color: #ff914d; color: white; padding: 30px 0; font-family: 'Segoe UI', sans-serif;">
+  <div style="max-width: 1000px; margin: auto; text-align: center;">
+    <h3 style="margin-bottom: 10px;">🐶 PetFinder</h3>
+    <p style="margin-bottom: 20px;">Conectando pets incríveis a lares amorosos 💕</p>
+    
+    <div style="margin-bottom: 20px;">
+      <a href="https://www.instagram.com/seuusuario" target="_blank" style="margin: 0 15px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="32" height="32">
+      </a>
+      <a href="https://www.facebook.com/seuusuario" target="_blank" style="margin: 0 15px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="32" height="32">
+      </a>
+    </div>
+    <nav style="margin-bottom: 15px;">
+      <a href="Index.html" style="color: white; margin: 0 10px; text-decoration: none;">Página Inicial</a> |
+      <a href="adocao.html" style="color: white; margin: 0 10px; text-decoration: none;">Adoção</a> |
+      <a href="dicas.html" style="color: white; margin: 0 10px; text-decoration: none;">Cuidados</a> |
+      <a href="contato.html" style="color: white; margin: 0 10px; text-decoration: none;">Contato</a>
+    </nav>
+
+    <p style="font-size: 14px;">© 2025 PetFinder. Todos os direitos reservados.</p>
+  </div>
+</footer>
+</body>
+</html>
