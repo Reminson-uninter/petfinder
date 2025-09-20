@@ -99,5 +99,18 @@ function autenticarAcao(acao, id) {
   }
 }
 
+function limparDados() {
+  if (!confirm("Tem certeza que deseja apagar todos os dados? Esta ação não pode ser desfeita.")) return;
+
+  localStorage.removeItem('pets');
+  localStorage.removeItem('petEditId');
+
+  alert("Todos os dados foram apagados com sucesso.");
+
+  const container = document.querySelector('.container-cards');
+  container.innerHTML = '<p>Todos os dados foram apagados.</p>';
+}
+
 window.addEventListener('DOMContentLoaded', exibirPets);
+
 
