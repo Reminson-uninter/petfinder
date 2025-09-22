@@ -6,6 +6,7 @@
   <title>PetFinder - Adoção Responsável</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/estilo-adocao.css" />
+  
 </head>
 <body>
   <header>
@@ -17,7 +18,7 @@
     </div>
     <nav id="nav-menu">
       <ul>
-        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="Index.html">Página Inicial</a></li>
         <li><a href="animais_encontra.html">Encontrados</a></li>
         <li><a href="adocao.html" target="_blank">Adoção</a></li>
         <li><a href="dicas.html">Dicas</a></li>
@@ -29,31 +30,14 @@
   </header>
 
   <main>
-    <section class="galeria-adocao">
-      <h1>Adoção Responsável</h1>
-      <div class="gallery">
-        <div class="animal-card">
-          <img src="assets/img/american.png" id="foto-pet" alt="Animal para adoção"  />
-          <div class="info">
-            <h3>Nome: Nina</h3>
-            <p>Idade: 2 anos</p>
-            <p>Temperamento: dócil e brincalhona</p>
-            
-            <button class="adopt-btn">Quero adotar</button>
-          </div>
-        </div>
-
-        <div class="animal-card">
-            <img src="assets/img/york fullHD.png" alt="Animal para adoção" id="foto-pet" />
-          <div class="info">
-            <h3>Nome: Thor</h3>
-            <p>Idade: 4 anos</p>
-            <p>Temperamento: calmo e carinhoso</p>
-            <button class="adopt-btn">Quero adotar</button>
-          </div>
-        </div>
-      </div>
-    </section>
+<input type="number" id="filtro-idade" placeholder="Idade máxima" />
+<select id="filtro-sexo">
+  <option value="">Todos</option>
+  <option value="Macho">Macho</option>
+  <option value="Fêmea">Fêmea</option>
+</select>
+<button id="btn-filtrar">Aplicar Filtros</button>
+    <section class="galeria-adocao"></section>
 
     <section class="rules">
       <h2>Regras e Orientações para Adoção</h2>
@@ -81,7 +65,7 @@
     </div>
 
     <nav style="margin-bottom: 15px;">
-      <a href="index.html" style="color: white; margin: 0 10px; text-decoration: none;">Página Inicial</a> |
+      <a href="Index.html" style="color: white; margin: 0 10px; text-decoration: none;">Página Inicial</a> |
       <a href="adocao.html" style="color: white; margin: 0 10px; text-decoration: none;">Adoção</a> |
       <a href="dicas.html" style="color: white; margin: 0 10px; text-decoration: none;">Cuidados</a> |
       <a href="contato.html" style="color: white; margin: 0 10px; text-decoration: none;">Contato</a>
@@ -90,22 +74,12 @@
     <p style="font-size: 14px;">© 2025 PetFinder. Todos os direitos reservados.</p>
   </div>
 </footer>
-<script>
-    const hamburger = document.getElementById('hamburger');
-    const nav = document.getElementById('nav-menu');
+<script src="script/exibirAdotados.js"></script>
+  
 
-    hamburger.addEventListener('click', () => {
-      nav.classList.toggle('active');
-    });
 
-  document.querySelectorAll('.adopt-btn').forEach(button => {
-    button.addEventListener('click', () => {
-      window.location.href = 'adotar.html';
-    });
-  });
-</script>
+
 </body>
-
 </html>
 
 
