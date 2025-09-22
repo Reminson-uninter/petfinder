@@ -83,29 +83,32 @@
     <!-- Cadastro de Pet -->
     <section>
       <h2>Cadastrar Pet para Adoção</h2>
-      <form id="cadastroPet">
-        <label for="nomePet">Nome do Pet:</label>
-        <input type="text" id="nomePet" name="nomePet" required />
+     <form id="cadastroPet">
+  <input type="text" name="nomePet" placeholder="Nome do Pet" required />
+  <input type="text" name="idadePet" placeholder="Idade" required />
+  <input type="text" name="tipoPet" placeholder="Tipo (cão, gato...)" required />
+  <input type="text" name="racaPet" placeholder="Raça" required />
+  <select name="sexoPet" required>
+    <option value="">Sexo</option>
+    <option value="Macho">Macho</option>
+    <option value="Fêmea">Fêmea</option>
+  </select>
+  <select name="portePet" required>
+    <option value="">Porte</option>
+    <option value="Pequeno">Pequeno</option>
+    <option value="Médio">Médio</option>
+    <option value="Grande">Grande</option>
+  </select>
+  <label><input type="checkbox" name="vacinaPet" /> Vacinado</label>
+  <label><input type="checkbox" name="castradoPet" /> Castrado</label>
+  <input type="file" name="fotoPet" accept="image/*" required />
+  <textarea name="descricaoPet" placeholder="Descrição do pet" required></textarea>
+  <button type="submit">Cadastrar</button>
+</form>
 
-        <label for="idadePet">Idade:</label>
-        <input type="text" id="idadePet" name="idadePet" required />
+<p id="mensagem-sucesso" style="display:none; color:green;">✅ Cadastro realizado com sucesso!</p>
 
-        <label for="portePet">Porte:</label>
-        <select id="portePet" name="portePet" required>
-          <option value="">Selecione</option>
-          <option value="pequeno">Pequeno</option>
-          <option value="médio">Médio</option>
-          <option value="grande">Grande</option>
-        </select>
 
-        <label for="descricaoPet">Descrição:</label>
-        <textarea id="descricaoPet" name="descricaoPet" rows="4" required></textarea>
-
-        <label for="fotoPet">URL da Foto:</label>
-        <input type="FILE" id="fotoPet" name="fotoPet"  required />
-
-        <button type="submit">Cadastrar Pet</button>
-      </form>
     </section>
 
     <div class="section-divider"></div>
@@ -144,7 +147,7 @@
       </a>
     </div>
     <nav style="margin-bottom: 15px;">
-      <a href="index.html" style="color: white; margin: 0 10px; text-decoration: none;">Página Inicial</a> |
+      <a href="Index.html" style="color: white; margin: 0 10px; text-decoration: none;">Página Inicial</a> |
       <a href="adocao.html" style="color: white; margin: 0 10px; text-decoration: none;">Adoção</a> |
       <a href="dicas.html" style="color: white; margin: 0 10px; text-decoration: none;">Cuidados</a> |
       <a href="contato.html" style="color: white; margin: 0 10px; text-decoration: none;">Contato</a>
@@ -153,6 +156,7 @@
     <p style="font-size: 14px;">© 2025 PetFinder. Todos os direitos reservados.</p>
   </div>
 </footer>
+<script src="script/cadastroPetAdoc.js"></script>
 </body>
-
 </html>
+
