@@ -3,8 +3,15 @@ document.getElementById('hamburger').addEventListener('click', () => {
   document.getElementById('nav-menu').classList.toggle('active');
 });
 
-// Recupera os pets cadastrados
-const dadosSalvos = JSON.parse(localStorage.getItem('dadosPet')) || [];
+// Recupera todos os pets de todas as ONGs
+const dadosPorOng = JSON.parse(localStorage.getItem('dadosPorOng')) || {};
+let todosPets = [];
+
+Object.values(dadosPorOng).forEach(ong => {
+  if (Array.isArray(ong.pets)) {
+    todosPets = todosPets.concat(ong.pets);
+  }
+});
 
 // Função para exibir os pets
 function exibir(pets) {
@@ -25,10 +32,12 @@ function exibir(pets) {
     img.src = pet.fotoPet || 'assets/img/default-pet.png';
     img.alt = `Foto de ${pet.nomePet}`;
     img.classList.add('foto-pet');
+    img.style.width = '280px';
 
     const info = document.createElement('div');
     info.classList.add('info');
     info.innerHTML = `
+      <h3>ID: ${pet.id}</h3>
       <h3><strong>Nome:</strong> ${pet.nomePet}</h3>
       <p><strong>Idade:</strong> ${pet.idadePet}</p>
       <p><strong>Tipo:</strong> ${pet.tipoPet}</p>
@@ -55,20 +64,29 @@ function exibir(pets) {
   });
 }
 
-// Filtro por idade e sexo
-document.getElementById('btn-filtrar').addEventListener('click', () => {
-  const idadeMax = parseInt(document.getElementById('filtro-idade').value);
-  const sexo = document.getElementById('filtro-sexo').value;
+// Filtro por tipo, sexo e porte
+document.getElementById('btnFiltrar').addEventListener('click', () => {
+  const tipo = document.getElementById('filtroTipo').value;
+  const sexo = document.getElementById('filtroSexo').value;
+  const porte = document.getElementById('filtroPorte').value;
 
-  const filtrados = dadosSalvos.filter(pet => {
-    const idadeNum = pet.idadePet ? parseInt(pet.idadePet.replace(/\D/g, '')) : NaN;
-    const idadeOk = isNaN(idadeMax) || idadeNum <= idadeMax;
+  const filtrados = todosPets.filter(pet => {
+    const tipoOk = !tipo || pet.tipoPet.toLowerCase() === tipo.toLowerCase();
     const sexoOk = !sexo || pet.sexoPet === sexo;
-    return idadeOk && sexoOk;
+    const porteOk = !porte || pet.portePet === porte;
+    return tipoOk && sexoOk && porteOk;
   });
 
   exibir(filtrados);
 });
 
+// Botão de limpar filtros
+document.getElementById('btnLimpar').addEventListener('click', () => {
+  document.getElementById('filtroTipo').value = '';
+  document.getElementById('filtroSexo').value = '';
+  document.getElementById('filtroPorte').value = '';
+  exibir(todosPets);
+});
+
 // Exibe todos ao carregar
-exibir(dadosSalvos);
+exibir(todosPets);
