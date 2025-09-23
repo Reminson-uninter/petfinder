@@ -1,42 +1,38 @@
-  document.getElementById('loginOng').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const formLogin = event.target;
-    const emailLogin = formLogin.emailLogin.value; 
-    const senhaLogin = formLogin.senhaLogin.value;
-    const ongCadastrada = JSON.parse(localStorage.getItem('ong'));
-    if (!ongCadastrada) {
-      alert('Nenhuma ONG cadastrada. Por favor, cadastre-se primeiro.');
-      return;
-    } 
-    if (emailLogin !== ongCadastrada.emailOng || senhaLogin !== ongCadastrada.senhaOng) {
-      alert('E-mail ou senha incorretos. Tente novamente.');
-      return;
-      
-    }
-    document.location.href = 'painel_ong.html';
-    alert('Login realizado com sucesso!');
-  });
-
-
-
-//cadastro ong
+// Cadastro de ONG
 document.getElementById('cadastroOng').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const formOng = event.target;
-    const dados = new FormData(formOng);
-    const dadosObj = {}
-    dados.forEach((value, key) => {
-      dadosObj[key] = value;
-    });
-   
-  
- const { nomeOng, emailOng, senhaOng, cidade, localidades } = dadosObj;
+  event.preventDefault();
+  const form = event.target;
+  const dados = new FormData(form);
+  const novaOng = {};
+  dados.forEach((value, key) => novaOng[key] = value);
 
-if (nomeOng && emailOng && senhaOng && cidade && localidades) {
-  localStorage.setItem('ong', JSON.stringify(dadosObj));
-  alert('ONG cadastrada com sucesso!');
-  formOng.reset();
-} else {
-  alert('Por favor, preencha todos os campos.');
-}
-  });
+  if (novaOng.nomeOng && novaOng.emailOng && novaOng.senhaOng && novaOng.cidade) {
+    novaOng.id = 'ong-' + Date.now();
+    const todasOngs = JSON.parse(localStorage.getItem('todasOngs')) || [];
+    todasOngs.push(novaOng);
+    localStorage.setItem('todasOngs', JSON.stringify(todasOngs));
+    alert('ONG cadastrada com sucesso!');
+    form.reset();
+  } else {
+    alert('Preencha todos os campos.');
+  }
+});
+
+// Login de ONG
+document.getElementById('loginOng').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const form = event.target;
+  const email = form.emailLogin.value;
+  const senha = form.senhaLogin.value;
+
+  const todasOngs = JSON.parse(localStorage.getItem('todasOngs')) || [];
+  const ongLogada = todasOngs.find(ong => ong.emailOng === email && ong.senhaOng === senha);
+
+  if (!ongLogada) {
+    alert('Email ou senha incorretos.');
+    return;
+  }
+
+  localStorage.setItem('ongLogada', JSON.stringify(ongLogada));
+  document.location.href = 'painel_ong.html';
+});
