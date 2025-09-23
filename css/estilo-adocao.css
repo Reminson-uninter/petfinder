@@ -101,13 +101,13 @@ main {
   transform: scale(1.05);
 }
 .foto-pet {
-  width: calc(100% - 30px); /* compensando a margem */
+  width: 100%;
   height: auto;
-  max-height: 300px;
-  margin: 15px;
+  max-height: 250px;
   object-fit: contain;
   border-radius: 8px;
   display: block;
+  margin: 0 auto;
 }
 
 .info {
@@ -186,6 +186,7 @@ main {
     padding: 10px 0;
   }
 }
+
 
 
 
