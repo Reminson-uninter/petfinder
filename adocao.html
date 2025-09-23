@@ -30,13 +30,30 @@
   </header>
 
   <main>
-<input type="number" id="filtro-idade" placeholder="Idade máxima" />
-<select id="filtro-sexo">
-  <option value="">Todos</option>
-  <option value="Macho">Macho</option>
-  <option value="Fêmea">Fêmea</option>
-</select>
-<button id="btn-filtrar">Aplicar Filtros</button>
+<div style="margin: 20px 0;">
+  <h4>🔍 Filtrar pets</h4>
+  <select id="filtroTipo">
+    <option value="">Tipo</option>
+    <option value="Cão">Cão</option>
+    <option value="Gato">Gato</option>
+  </select>
+
+  <select id="filtroSexo">
+    <option value="">Sexo</option>
+    <option value="Macho">Macho</option>
+    <option value="Fêmea">Fêmea</option>
+  </select>
+
+  <select id="filtroPorte">
+    <option value="">Porte</option>
+    <option value="Pequeno">Pequeno</option>
+    <option value="Médio">Médio</option>
+    <option value="Grande">Grande</option>
+  </select>
+
+  <button id="btnFiltrar">Filtrar</button>
+  <button id="btnLimpar">Limpar</button>
+</div>
     <section class="galeria-adocao"></section>
 
     <section class="rules">
@@ -81,6 +98,3 @@
 
 </body>
 </html>
-
-
-
