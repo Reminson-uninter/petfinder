@@ -6,71 +6,7 @@
   <title>Painel da ONG - PetFinder</title>
   <link rel="stylesheet" href="css/painel_ong.css" />
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 0;
-    }
 
-    header {
-      background-color: #ff914d;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    main {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      color: #333;
-      margin-bottom: 10px;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 40px;
-    }
-
-    label {
-      margin-top: 15px;
-      font-weight: bold;
-    }
-
-    input, textarea, select {
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 12px;
-      background-color: #ff914d;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background-color: #e67e22;
-    }
-
-    .section-divider {
-      border-top: 2px solid #eee;
-      margin: 40px 0;
-    }
   </style>
 </head>
 <body>
@@ -83,28 +19,29 @@
     <!-- Cadastro de Pet -->
     <section>
       <h2>Cadastrar Pet para Adoção</h2>
-     <form id="cadastroPet">
-  <input type="text" name="nomePet" placeholder="Nome do Pet" required />
-  <input type="text" name="idadePet" placeholder="Idade" required />
-  <input type="text" name="tipoPet" placeholder="Tipo (cão, gato...)" required />
-  <input type="text" name="racaPet" placeholder="Raça" required />
-  <select name="sexoPet" required>
-    <option value="">Sexo</option>
-    <option value="Macho">Macho</option>
-    <option value="Fêmea">Fêmea</option>
-  </select>
-  <select name="portePet" required>
-    <option value="">Porte</option>
-    <option value="Pequeno">Pequeno</option>
-    <option value="Médio">Médio</option>
-    <option value="Grande">Grande</option>
-  </select>
-  <label><input type="checkbox" name="vacinaPet" /> Vacinado</label>
-  <label><input type="checkbox" name="castradoPet" /> Castrado</label>
-  <input type="file" name="fotoPet" accept="image/*" required />
-  <textarea name="descricaoPet" placeholder="Descrição do pet" required></textarea>
-  <button type="submit">Cadastrar</button>
-</form>
+ <form id="cadastroPet">
+    <input type="text" name="nomePet" placeholder="Nome" required />
+    <input type="text" name="idadePet" placeholder="Idade" required />
+    <input type="text" name="tipoPet" placeholder="Tipo" required />
+    <input type="text" name="racaPet" placeholder="Raça" required />
+    <select name="sexoPet" required>
+      <option value="">Sexo</option>
+      <option value="Macho">Macho</option>
+      <option value="Fêmea">Fêmea</option>
+    </select>
+    <select name="portePet" required>
+      <option value="">Porte</option>
+      <option value="Pequeno">Pequeno</option>
+      <option value="Médio">Médio</option>
+      <option value="Grande">Grande</option>
+    </select>
+    <label><input type="checkbox" name="vacinaPet" /> Vacinado</label>
+    <label><input type="checkbox" name="castradoPet" /> Castrado</label>
+    <input type="file" name="fotoPet" accept="image/*" required />
+    <textarea name="descricaoPet" placeholder="Descrição" required></textarea>
+    <button type="submit">Cadastrar</button>
+  </form>
+
 
 <p id="mensagem-sucesso" style="display:none; color:green;">✅ Cadastro realizado com sucesso!</p>
 
@@ -133,6 +70,36 @@
       </form>
     </section>
   </main>
+  <section>
+       <h3>🐾 Pets cadastrados</h3>
+       <div style="margin: 20px 0;">
+  <h4>🔍 Filtrar pets</h4>
+  <select id="filtroTipo">
+    <option value="">Tipo</option>
+    <option value="Cão">Cão</option>
+    <option value="Gato">Gato</option>
+  </select>
+
+  <select id="filtroSexo">
+    <option value="">Sexo</option>
+    <option value="Macho">Macho</option>
+    <option value="Fêmea">Fêmea</option>
+  </select>
+
+  <select id="filtroPorte">
+    <option value="">Porte</option>
+    <option value="Pequeno">Pequeno</option>
+    <option value="Médio">Médio</option>
+    <option value="Grande">Grande</option>
+  </select>
+
+  <button id="btnFiltrar">Filtrar</button>
+  <button id="btnLimpar">Limpar</button>
+</div>
+             <div id="galeriaPets"></div>
+
+
+  </section>
    <footer style="background-color: #ff914d; color: white; padding: 30px 0; font-family: 'Segoe UI', sans-serif;">
   <div style="max-width: 1000px; margin: auto; text-align: center;">
     <h3 style="margin-bottom: 10px;">🐶 PetFinder</h3>
@@ -147,7 +114,7 @@
       </a>
     </div>
     <nav style="margin-bottom: 15px;">
-      <a href="Index.html" style="color: white; margin: 0 10px; text-decoration: none;">Página Inicial</a> |
+      <a href="index.html" style="color: white; margin: 0 10px; text-decoration: none;">Página Inicial</a> |
       <a href="adocao.html" style="color: white; margin: 0 10px; text-decoration: none;">Adoção</a> |
       <a href="dicas.html" style="color: white; margin: 0 10px; text-decoration: none;">Cuidados</a> |
       <a href="contato.html" style="color: white; margin: 0 10px; text-decoration: none;">Contato</a>
@@ -156,7 +123,6 @@
     <p style="font-size: 14px;">© 2025 PetFinder. Todos os direitos reservados.</p>
   </div>
 </footer>
-<script src="script/cadastroPetAdoc.js"></script>
+<script src="script/painelOng.js"></script>
 </body>
 </html>
-
