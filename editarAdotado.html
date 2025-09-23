@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editar Pet - PetFinder</title>
+  <link rel="stylesheet" href="css/editar_pet.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #ff914d;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input, select, textarea {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    button {
+      padding: 12px;
+      background-color: #ff914d;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e67e22;
+    }
+
+    #mensagem-sucesso {
+      margin-top: 15px;
+      color: green;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>✏️ Editar Pet</h1>
+    <p>Atualize as informações do pet cadastrado</p>
+  </header>
+
+  <main>
+    <h2>Informações do Pet</h2>
+    <form id="editarPetForm">
+      <input type="text" name="nomePet" placeholder="Nome do Pet" required />
+      <input type="text" name="idadePet" placeholder="Idade" required />
+      <input type="text" name="tipoPet" placeholder="Tipo (cão, gato...)" required />
+      <input type="text" name="racaPet" placeholder="Raça" required />
+      <select name="sexoPet" required>
+        <option value="">Sexo</option>
+        <option value="Macho">Macho</option>
+        <option value="Fêmea">Fêmea</option>
+      </select>
+      <select name="portePet" required>
+        <option value="">Porte</option>
+        <option value="Pequeno">Pequeno</option>
+        <option value="Médio">Médio</option>
+        <option value="Grande">Grande</option>
+      </select>
+      <label><input type="checkbox" name="vacinaPet" /> Vacinado</label>
+      <label><input type="checkbox" name="castradoPet" /> Castrado</label>
+      <input type="file" name="fotoPet" accept="image/*" />
+      <textarea name="descricaoPet" placeholder="Descrição do pet" required></textarea>
+      <button type="submit">Salvar Alterações</button>
+    </form>
+
+    <p id="mensagem-sucesso">✅ Pet atualizado com sucesso!</p>
+  </main>
+
+<script>
+  const petEditando = JSON.parse(localStorage.getItem('petEditando'));
+  const idOng = localStorage.getItem('ongEditando');
+
+  if (!petEditando || !idOng) {
+    alert('Pet ou ONG não encontrados para edição.');
+    window.location.href = 'painel_ong.html';
+  }
+
+  const form = document.getElementById('editarPetForm');
+  form.nomePet.value = petEditando.nomePet;
+  form.idadePet.value = petEditando.idadePet;
+  form.tipoPet.value = petEditando.tipoPet;
+  form.racaPet.value = petEditando.racaPet;
+  form.sexoPet.value = petEditando.sexoPet;
+  form.portePet.value = petEditando.portePet;
+  form.descricaoPet.value = petEditando.descricaoPet;
+  form.vacinaPet.checked = petEditando.vacinaPet;
+  form.castradoPet.checked = petEditando.castradoPet;
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const dados = new FormData(form);
+    const dadosAtualizados = {
+      id: petEditando.id,
+      nomePet: dados.get('nomePet'),
+      idadePet: dados.get('idadePet'),
+      tipoPet: dados.get('tipoPet'),
+      racaPet: dados.get('racaPet'),
+      sexoPet: dados.get('sexoPet'),
+      portePet: dados.get('portePet'),
+      descricaoPet: dados.get('descricaoPet'),
+      vacinaPet: dados.get('vacinaPet') ? true : false,
+      castradoPet: dados.get('castradoPet') ? true : false
+    };
+
+    const foto = dados.get('fotoPet');
+    if (foto && foto.size > 0 && foto.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        dadosAtualizados.fotoPet = e.target.result;
+        salvarPet(dadosAtualizados);
+      };
+      reader.readAsDataURL(foto);
+    } else {
+      dadosAtualizados.fotoPet = petEditando.fotoPet;
+      salvarPet(dadosAtualizados);
+    }
+  });
+
+  function salvarPet(pet) {
+    const dadosPorOng = JSON.parse(localStorage.getItem('dadosPorOng')) || {};
+    const dadosDaOng = dadosPorOng[idOng] || { pets: [] };
+
+    const petsAtualizados = dadosDaOng.pets.map(p => p.id === pet.id ? pet : p);
+    dadosDaOng.pets = petsAtualizados;
+    dadosPorOng[idOng] = dadosDaOng;
+
+    try {
+      localStorage.setItem('dadosPorOng', JSON.stringify(dadosPorOng));
+      localStorage.removeItem('petEditando');
+      localStorage.removeItem('ongEditando');
+      document.getElementById('mensagem-sucesso').style.display = 'block';
+      setTimeout(() => window.location.href = 'painel_ong.html', 1500);
+    } catch (e) {
+      alert('Erro ao salvar. A imagem pode estar muito grande. Tente uma menor ou use um link externo.');
+    }
+  }
+</script>
+</body>
+</html>
