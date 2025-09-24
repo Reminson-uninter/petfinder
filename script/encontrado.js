@@ -1,3 +1,15 @@
+document.addEventListener("DOMContentLoaded", function () {
+  exibirPets(); // ← Chamada da função aqui
+
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('nav-menu');
+
+  hamburger.addEventListener('click', () => {
+    nav.classList.toggle('active');
+  });
+
+
+
 function exibirPets() {
   const listaPets = JSON.parse(localStorage.getItem('pets')) || [];
   const container = document.querySelector('.container-cards');
@@ -66,5 +78,6 @@ function exibirPets() {
     container.appendChild(card);
   });
 }
+
 
 window.addEventListener('DOMContentLoaded', exibirPets);
