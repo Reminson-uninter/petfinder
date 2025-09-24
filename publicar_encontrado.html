@@ -227,7 +227,20 @@
     <p style="font-size: 14px;">© 2025 PetFinder. Todos os direitos reservados.</p>
   </div>
 </footer>
+  
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  exibirPets(); // ← Chamada da função aqui
+
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('nav-menu');
+
+  hamburger.addEventListener('click', () => {
+    nav.classList.toggle('active');
+  });
+  </script>
 </body>
 
 </html>
+
 
