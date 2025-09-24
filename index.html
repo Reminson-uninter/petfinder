@@ -37,7 +37,7 @@
        
       </div>
        <h1>Bem-vindo ao PetFinder!</h1>
-      <h2>Cadastre seu Pet desaparecido aqui!</h2>
+       <h2>Cadastre seu Pet desaparecido aqui!</h2>
       <button id="action-btn">Cadastrar</button>
     </section>
 
@@ -135,40 +135,26 @@ Juntos, podemos transformar perdas em reencontros e solidão em novos começos. 
 
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    exibirPets(); // ← Chamada da função aqui
+document.addEventListener("DOMContentLoaded", function () {
+  exibirPets(); // ← Chamada da função aqui
 
-    const hamburger = document.getElementById('hamburger');
-    const nav = document.getElementById('nav-menu');
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('nav-menu');
 
-    hamburger.addEventListener('click', () => {
-      nav.classList.toggle('active');
-    });
-
-    document.getElementById('action-btn').addEventListener('click', () => {
-      const usuarioLogado = localStorage.getItem('usuarioLogado');
-
-      if (!usuarioLogado) {
-        localStorage.setItem("destinoAposLogin", "publicar.html");
-        window.location.href = 'criar-conta.html';
-      } else {
-        window.location.href = 'publicar.html';
-      }
-    });
+  hamburger.addEventListener('click', () => {
+    nav.classList.toggle('active');
   });
-</script>
 
-<script>
-// 🔁 Botão de ação com redirecionamento inteligente
-document.getElementById('action-btn').addEventListener('click', () => {
-  const usuarioLogado = localStorage.getItem('usuarioLogado');
+  document.getElementById('action-btn').addEventListener('click', () => {
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
 
-  if (!usuarioLogado) {
-    localStorage.setItem("destinoAposLogin", "publicar.html");
-    window.location.href = 'criar-conta.html';
-  } else {
-    window.location.href = 'publicar.html';
-  }
+    if (!usuarioLogado) {
+      localStorage.setItem("destinoAposLogin", "publicar.html");
+      window.location.href = 'criar-conta.html';
+    } else {
+      window.location.href = 'publicar.html';
+    }
+  });
 });
 
 // 🐾 Exibe os pets com todos os dados relevantes
@@ -196,10 +182,15 @@ function exibirPets() {
       card.style.overflow = 'hidden';
       card.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
 
+      const statusColor = pet.status === 'encontrado' ? '' : '#ff6600';
+      const statusTexto = pet.status ? pet.status.toUpperCase() : 'DESAPARECIDO';
+
       card.innerHTML = `
         <img src="${pet.imagem}" alt="Imagem do pet" style="width:100%; height:auto; border-radius:5px;">
         <h3 style="margin: 5px 0;">${pet.nome}</h3>
-        <div class="sumido"> <strong>Desaparecido</strong> </div>
+        <div class="sumido">
+          <strong>Status:</strong> <span style="color:${statusColor};"><strong>${statusTexto}</strong></span>
+        </div>
         <p><strong>Raça:</strong> ${pet.raca}</p>
         <p><strong>Última localização:</strong> ${pet.localiza}</p>
         <p><strong>Data:</strong> ${pet.data}</p>
@@ -214,40 +205,24 @@ function exibirPets() {
         <p><strong>Descrição:</strong> ${pet.descricao}</p>
         <div class="actions" style="display: flex; gap: 5px; margin-top: 10px;"></div>
       `;
-        
+
+      const actionsDiv = card.querySelector('.actions');
+
       const saibaMaisBtn = document.createElement('button');
       saibaMaisBtn.textContent = 'Saiba Mais';
       saibaMaisBtn.className = 'btn-saiba-mais';
       saibaMaisBtn.style.flex = '1';
-
       saibaMaisBtn.addEventListener('click', () => {
         window.location.href = `detalhes.html?id=${pet.id}`;
       });
-
-      const encontrouBtn = document.createElement('button');
-      encontrouBtn.textContent = 'Encontrei este pet';
-      encontrouBtn.className = 'btn-encontrou';
-      encontrouBtn.style.flex = '1';
-      encontrouBtn.style.backgroundColor = '#4CAF50';
-      encontrouBtn.style.color = '#fff';
-
-      encontrouBtn.addEventListener('click', () => {
-        alert(`Ótimo! Entre em contato com o responsável: ${pet.contato}`);
-        window.location.href = `https://wa.me/55${pet.whatsapp?.replace(/\D/g, '')}`;
-      });
-
-      const actionsDiv = card.querySelector('.actions');
       actionsDiv.appendChild(saibaMaisBtn);
-      actionsDiv.appendChild(encontrouBtn);
 
       container.appendChild(card);
     });
   }, 300);
 }
+
 </script>
 
 </body>
 </html>
-
-
-
