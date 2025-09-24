@@ -17,8 +17,10 @@ document.querySelector('#form-container').addEventListener('submit', function(ev
   const imagemInput = document.getElementById('imagem');
   const arquivoImagem = imagemInput.files[0];
 
+  removerErros();
+
   if (!arquivoImagem) {
-    alert('Por favor, selecione uma imagem do pet.');
+    mostrarErro(imagemInput, 'Por favor, selecione uma imagem do pet.');
     return;
   }
 
@@ -44,12 +46,48 @@ document.querySelector('#form-container').addEventListener('submit', function(ev
       'nome', 'localiza', 'raca', 'sexo', 'idade',
       'data', 'contato', 'whatsapp', 'imagem'
     ];
-    const camposVazios = camposObrigatorios.some(campo => !pet[campo] && pet[campo] !== 0);
 
-    if (camposVazios) {
-      alert('Por favor, preencha todos os campos obrigatórios.');
-      return;
+    let valido = true;
+
+    camposObrigatorios.forEach(campo => {
+      if (!pet[campo] && pet[campo] !== 0) {
+        const input = document.getElementById(campo === 'localiza' ? 'localizacao' : campo);
+        mostrarErro(input, 'Campo obrigatório.');
+        valido = false;
+      }
+    });
+
+    // Validação do campo "contato" como e-mail
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(pet.contato);
+    if (!emailValido) {
+      mostrarErro(document.getElementById('contato'), 'Insira um e-mail válido.');
+      valido = false;
     }
+
+    // Validação do campo "whatsapp" como número com 10 a 13 dígitos
+    const whatsappValido = /^\d{10,13}$/.test(pet.whatsapp);
+    if (!whatsappValido) {
+      mostrarErro(document.getElementById('whatsapp'), 'Informe apenas números entre 10 e 13 dígitos.');
+      valido = false;
+    }
+
+    // Validação do campo "data"
+    const dataInput = document.getElementById("data");
+    const dataValor = pet.data;
+    const dataFormatada = new Date(dataValor);
+    const hoje = new Date();
+
+    if (isNaN(dataFormatada.getTime())) {
+      mostrarErro(dataInput, 'Insira uma data válida.');
+      valido = false;
+    }
+
+    if (dataFormatada > hoje) {
+      mostrarErro(dataInput, 'A data não pode ser no futuro.');
+      valido = false;
+    }
+
+    if (!valido) return;
 
     const listaPets = JSON.parse(localStorage.getItem('pets')) || [];
     listaPets.push(pet);
@@ -65,3 +103,15 @@ document.querySelector('#form-container').addEventListener('submit', function(ev
 
   reader.readAsDataURL(arquivoImagem);
 });
+
+// Funções auxiliares
+function mostrarErro(input, mensagem) {
+  const erro = document.createElement('small');
+  erro.classList.add('erro');
+  erro.textContent = mensagem;
+  input.insertAdjacentElement('afterend', erro);
+}
+
+function removerErros() {
+  document.querySelectorAll('.erro').forEach(el => el.remove());
+}

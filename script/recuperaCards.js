@@ -72,7 +72,9 @@ function exibirPets() {
           <strong>Status:</strong> <span style="color:${statusColor};"><strong>${statusTexto}</strong></span>
         </div>
         <p><strong>ID:</strong> ${pet.id}</p>
-        <p><strong>Raça:</strong> ${pet.raca}</p>
+      <p><strong>Tipo:</strong> ${pet.raca}</p>
+        <p><strong>Sexo:</strong> ${pet.sexo}</p>
+        
         <p><strong>Última localização:</strong> ${pet.localiza}</p>
         <p><strong>Data:</strong> ${pet.data}</p>
         <p><strong>Contato:</strong> ${pet.contato}</p>
