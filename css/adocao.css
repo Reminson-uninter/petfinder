@@ -297,6 +297,9 @@ select:focus {
   header h1 {
     font-size: 2rem;
   }
+  nav li:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
 }
 
 /* Telas médias */
@@ -343,4 +346,12 @@ select:focus {
   .animal-card {
     width: 100%;
   }
+}
+/* Rodapé */
+footer {
+  background-color: #ff751a; /* mesma cor do cabeçalho */
+  color: white;
+  padding: 30px 0;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
 }

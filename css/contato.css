@@ -14,7 +14,7 @@ body {
 
 /* Cabeçalho */
 header {
-  background-color: #ff751a;
+ background-color: #ff751a;;
   padding: 15px 20px;
   display: flex;
   justify-content: space-between;
@@ -115,12 +115,10 @@ footer {
 /* Responsividade Mobile */
 /* ===================== */
 @media (max-width: 768px) {
-  /* Mostrar ícone hambúrguer */
   .hamburger {
     display: flex;
   }
 
-  /* Esconder menu inicialmente */
   nav {
     position: absolute;
     top: 70px;
@@ -129,17 +127,46 @@ footer {
     background-color: #ff751a;
     display: none;
     flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
+    align-items: flex-start; /* Alinha à esquerda */
+    padding: 20px;
+  }
+
+  nav.active {
+    display: flex;
   }
 
   nav ul {
     flex-direction: column;
     gap: 15px;
+    width: 100%;
   }
 
-  /* Quando ativado */
-  nav.active {
-    display: flex;
+  nav li {
+    width: 100%;
   }
+
+  nav a {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-family: 'Fredoka One', sans-serif;
+    font-weight: 500;
+    text-align: left; /* Alinha texto à esquerda */
+  }
+
+  nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffd699;
+    border-radius: 5px;
+  }
+}
+/* Rodapé */
+footer {
+  background-color: #ff751a; /* mesma cor do cabeçalho */
+  color: white;
+  padding: 30px 0;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
 }

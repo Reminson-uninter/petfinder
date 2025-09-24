@@ -15,38 +15,49 @@ body {
 }
 
     /* Cabeçalho */
-    header {
-      position: fixed;
-      background-color: #ff751a;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      top: 0;
-      flex-wrap: wrap;
-    }
 
-    header h1 {
-      font-family: 'Fredoka One', sans-serif;
-      color: white;
-      font-size: 2.5rem;
-    }
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ff751a;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+
+/* Título */
+header h1 {
+  font-family: 'Fredoka One', sans-serif;
+  color: white;
+  font-size: 2.5rem;
+  margin: 0;
+}
+
 
     /* Menu hamburguer */
-    .hamburger {
-      cursor: pointer;
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-    }
 
-    .hamburger span {
-      width: 25px;
-      height: 3px;
-      background-color: white;
-      border-radius: 2px;
-    }
+/* Menu hamburguer */
+.hamburger {
+  cursor: pointer;
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1001;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+}
+
 
     nav ul {
       list-style: none;
@@ -314,7 +325,7 @@ button:hover {
 
   nav {
     position: absolute;
-    top: 60px;
+    top: 58px;
     left: 0;
     width: 100%;
     background-color: #ff6600;
@@ -347,6 +358,9 @@ button:hover {
 
   .pet-card {
     width: 100%;
+  }
+   nav li:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   }
 }
 
@@ -432,9 +446,17 @@ button:hover {
   }
 }
 .sumido {
-  background-color: #ff4c4c;
+
   color: white;
   font-weight: bold;
+  padding: 5px 10px;
   font-size: 1.2em;
+  text-align: left;
+}
+footer {
+  background-color: #ff751a; /* mesma cor do cabeçalho */
+  color: white;
+  padding: 30px 0;
+  font-family: 'Segoe UI', sans-serif;
   text-align: center;
 }

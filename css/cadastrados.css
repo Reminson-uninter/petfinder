@@ -12,6 +12,21 @@
       color: #333;
       line-height: 1.6;
     }
+    html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
 
     /* Cabeçalho */
     header {
@@ -127,7 +142,7 @@
       background-color: #4CAF50;
       color: white;
       border: none;
-      padding: 8px 12px;
+      padding: 5px 10px;
       border-radius: 5px;
       cursor: pointer;
       margin-right: 5px;
@@ -137,7 +152,7 @@
       background-color: #f44336;
       color: white;
       border: none;
-      padding: 8px 12px;
+      padding: 5px 10px;
       border-radius: 5px;
       cursor: pointer;
     }
@@ -150,7 +165,7 @@
 
       nav {
         position: absolute;
-        top: 60px;
+        top: 80px;
         left: 0;
         width: 100%;
         background-color: #ff6600;
@@ -210,7 +225,7 @@
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
-  font-size: 15px;
+  font-size: 10px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -235,4 +250,13 @@
 .btn:active {
   transform: scale(0.97);
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Rodapé */
+footer {
+  background-color: #ff751a; /* mesma cor do cabeçalho */
+  color: white;
+  padding: 30px 0;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
 }
