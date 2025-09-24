@@ -5,193 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PetFinder - Cadastro de Pet</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins&display=swap" rel="stylesheet">
-  
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-    
-      color: #333;
-    }
-
-    /* Cabeçalho */
-    header {
-      background-color: #ff751a;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      z-index: 10;
-    }
-
-    header h1 {
-      font-family: 'Fredoka One', sans-serif;
-      color: white;
-      font-size: 2rem;
-      margin: 0;
-    }
-
-    .hamburger {
-      cursor: pointer;
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .hamburger span {
-      width: 25px;
-      height: 3px;
-      background-color: white;
-      border-radius: 2px;
-    }
-
-    nav {
-      display: flex;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-      margin: 0;
-      padding: 0;
-    }
-
-    nav a {
-      font-family: 'Fredoka One', sans-serif;
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    @media screen and (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .hamburger {
-        display: flex;
-      }
-
-      nav {
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background-color: #ff6600;
-        display: none;
-        flex-direction: column;
-        z-index: 100;
-      }
-
-      nav.active {
-        display: flex;
-      }
-
-      nav ul {
-        flex-direction: column;
-        padding: 10px 0;
-      }
-
-      nav li {
-        padding: 10px 20px;
-      }
-    }
-
-    /* Conteúdo */
-    .cadastro-container {
-      max-width: 800px;
-      margin: 3rem auto;
-      background-color: #fff;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      padding: 2rem;
-    }
-
-    h2 {
-      font-family: 'Fredoka One', sans-serif;
-      text-align: center;
-      color: #4CAF50;
-      margin-bottom: 1rem;
-    }
-
-    .dicas {
-      background-color: #eaffd0;
-      padding: 1rem;
-      border-radius: 15px;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    .dicas h3 {
-      margin-top: 0;
-      color: #2e7d32;
-    }
-
- .form-container {
-      background-color: white;
-      max-width: 500px;
-      margin: 50px auto;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      text-align: center;
-      color: #ff6600;
-    }
-
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-    }
-
-    .botoes {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-
-    button {
-      padding: 10px 20px;
-      background-color: #ff6600;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #e65c00;
-    }
-
-    @media screen and (max-width: 600px) {
-      form {
-        grid-template-columns: 1fr;
-      }
-
-      textarea, button {
-        grid-column: span 1;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/publicar.css">
 </head>
 <body>
 
@@ -266,7 +80,7 @@
 
   <div>
     <label for="contato">Contato:</label>
-    <input type="tel" id="contato" name="contato" placeholder="Ex: (00) 0000-0000 ou Email" required>
+    <input type="email" id="contato" name="contato" placeholder="Ex:  Email" required>
   </div>
 
   <div>
@@ -287,11 +101,11 @@
   <button type="submit">Cadastrar</button>
 </form>
   </div>
-<footer style="background-color: #ff914d; color: white; padding: 30px 0; font-family: 'Segoe UI', sans-serif;">
-  <div style="max-width: 1000px; margin: auto; text-align: center;">
+<footer>
+  <div style="max-width: 1000px; margin: auto;">
     <h3 style="margin-bottom: 10px;">🐶 PetFinder</h3>
     <p style="margin-bottom: 20px;">Conectando pets incríveis a lares amorosos 💕</p>
-    
+
     <div style="margin-bottom: 20px;">
       <a href="https://www.instagram.com/seuusuario" target="_blank" style="margin: 0 15px;">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="32" height="32">
@@ -301,12 +115,14 @@
       </a>
     </div>
 
-    <nav style="margin-bottom: 15px;">
-      <a href="Index.html" style="color: white; margin: 0 10px; text-decoration: none;">Página Inicial</a> |
-      <a href="adocao.html" style="color: white; margin: 0 10px; text-decoration: none;">Adoção</a> |
-      <a href="dicas.html" style="color: white; margin: 0 10px; text-decoration: none;">Cuidados</a> |
-      <a href="contato.html" style="color: white; margin: 0 10px; text-decoration: none;">Contato</a>
-    </nav>
+    <div class="nav-footer">
+      <nav style="margin-bottom: 15px;">
+        <a href="index.html" style="color: white; margin: 0 10px; text-decoration: none;">Página Inicial</a> |
+        <a href="adocao.html" style="color: white; margin: 0 10px; text-decoration: none;">Adoção</a> |
+        <a href="dicas.html" style="color: white; margin: 0 10px; text-decoration: none;">Cuidados</a> |
+        <a href="contato.html" style="color: white; margin: 0 10px; text-decoration: none;">Contato</a>
+      </nav>
+    </div>
 
     <p style="font-size: 14px;">© 2025 PetFinder. Todos os direitos reservados.</p>
   </div>

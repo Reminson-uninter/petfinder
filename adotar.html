@@ -117,25 +117,57 @@
 
     <p style="font-size: 14px;">© 2025 PetFinder. Todos os direitos reservados.</p>
   </div>
-</footer>
- <script>
+<script>
+// Menu responsivo
 const hamburger = document.getElementById('hamburger');
-  const nav = document.getElementById('nav-menu');
+const nav = document.getElementById('nav-menu');
 
-  hamburger.addEventListener('click', () => {
-    nav.classList.toggle('active');
+hamburger.addEventListener('click', () => {
+  nav.classList.toggle('active');
+});
+
+// Animação de foco nos inputs
+document.querySelectorAll('#formAdocao input, #formAdocao textarea').forEach(input => {
+  input.addEventListener('focus', () => {
+    const label = input.previousElementSibling;
+    if (label) label.style.fontSize = '20px';
   });
-
-  document.querySelectorAll('#formAdocao input').forEach(input => {
-    input.addEventListener('focus', () => {
-      input.previousElementSibling.style.fontSize = '20px';
-    });
-    input.addEventListener('blur', () => {
-      input.previousElementSibling.style.fontSize = '16px';
-    });
+  input.addEventListener('blur', () => {
+    const label = input.previousElementSibling;
+    if (label) label.style.fontSize = '16px';
   });
+});
 
-  // Envio do formulário
+// Função de validação
+function validarFormulario(formData) {
+  const camposObrigatorios = ['nome', 'email', 'telefone', 'endereco', 'pet', 'motivo', 'experiencia'];
+  for (let campo of camposObrigatorios) {
+    if (!formData[campo] || formData[campo].trim() === '') {
+      return `⚠️ O campo "${campo}" é obrigatório.`;
+    }
+  }
+
+  // Validação de e-mail
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(formData.email)) {
+    return '⚠️ O e-mail informado não é válido.';
+  }
+
+  // Validação de telefone (formato brasileiro)
+  const telefoneRegex = /^\(?\d{2}\)?[\s-]?\d{4,5}-?\d{4}$/;
+  if (!telefoneRegex.test(formData.telefone)) {
+    return '⚠️ O telefone informado não é válido.';
+  }
+
+  // Validação de nome mínimo
+  if (formData.nome.trim().length < 3) {
+    return '⚠️ O nome deve ter pelo menos 3 caracteres.';
+  }
+
+  return null; // Sem erros
+}
+
+// Envio do formulário
 document.querySelector("#formAdocao").addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -150,14 +182,26 @@ document.querySelector("#formAdocao").addEventListener("submit", (e) => {
     compromisso: document.getElementById("check").checked ? "Sim" : "Não"
   };
 
+  const msg = document.getElementById("mensagem");
+  const erro = validarFormulario(formData);
+
+  if (erro) {
+    msg.textContent = erro;
+    msg.style.backgroundColor = "#f8d7da";
+    msg.style.color = "#721c24";
+    msg.style.padding = "10px";
+    msg.style.borderRadius = "5px";
+    msg.style.marginTop = "15px";
+    msg.style.display = "block";
+    return;
+  }
+
   fetch("https://api.sheetmonkey.io/form/ozqbywstCFtqeGFHNboP5p", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData)
   })
   .then(response => {
-    const msg = document.getElementById("mensagem");
-
     if (!response.ok) {
       return response.text().then(text => { throw new Error(text); });
     }
@@ -171,32 +215,28 @@ document.querySelector("#formAdocao").addEventListener("submit", (e) => {
     msg.style.display = "block";
 
     e.target.reset();
+
+    setTimeout(() => {
+      msg.style.display = "none";
+    }, 5000);
   })
   .catch(error => {
     console.error("Erro:", error);
     localStorage.setItem("adocaoPendente", JSON.stringify(formData));
 
-    const msg = document.getElementById("mensagem");
- msg.textContent = "✅ Solicitação enviada com sucesso!";
-msg.style.backgroundColor = "#d4edda";
-msg.style.color = "#155724";
-msg.style.padding = "10px";
-msg.style.borderRadius = "5px";
-msg.style.marginTop = "15px";
-msg.style.display = "block";
+    msg.textContent = "⚠️ Houve um problema ao enviar. Salvamos sua solicitação localmente.";
+    msg.style.backgroundColor = "#fff3cd";
+    msg.style.color = "#856404";
+    msg.style.padding = "10px";
+    msg.style.borderRadius = "5px";
+    msg.style.marginTop = "15px";
+    msg.style.display = "block";
 
-setTimeout(() => {
-  msg.style.display = "none";
-}, 5000);
+    setTimeout(() => {
+      msg.style.display = "none";
+    }, 5000);
   });
-  e.target.reset();
-
 });
-
- 
-
-    
-
 </script>
 
 </body>

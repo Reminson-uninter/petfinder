@@ -5,86 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Área da ONG - PetFinder</title>
   <link rel="stylesheet" href="css/ongs.css" />
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fefefe;
-      margin: 0;
-      padding: 0;
-    }
 
-    header {
-        background-color: #ff751a; 
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    main {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      color: #333;
-      margin-bottom: 10px;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    label {
-      margin-top: 15px;
-      font-weight: bold;
-    }
-
-    input, select {
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 12px;
-      background-color: #ff914d;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background-color: #e67e22;
-    }
-
-    .link-painel {
-      margin-top: 30px;
-      text-align: center;
-    }
-
-    .link-painel a {
-      color: #ff914d;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    /* Rodapé */
-footer {
-  background-color: #ff751a; /* mesma cor do cabeçalho */
-  color: white;
-  padding: 30px 0;
-  font-family: 'Segoe UI', sans-serif;
-  text-align: center;
-}
-  </style>
 </head>
 <body>
   <header>
@@ -96,22 +17,40 @@ footer {
   <main>
     <section>
      
-        <h1>Login ONG</h1>
-  <form id="loginOng">
-    <input type="email" name="emailLogin" placeholder="Email" required />
-    <input type="password" name="senhaLogin" placeholder="Senha" required />
-    <button type="submit">Entrar</button>
-  </form>
+      
+ <h1>Login ONG</h1>
+<form id="loginOng">
+  <label for="emailLogin">Email:</label>
+  <input type="email" id="emailLogin" name="emailLogin" placeholder="Email" required />
+  <small class="erro" id="erroEmailLogin"></small>
 
-  <h2>Cadastro ONG</h2>
-  <form id="cadastroOng">
-    <input type="text" name="nomeOng" placeholder="Nome da ONG" required />
-    <input type="email" name="emailOng" placeholder="Email" required />
-    <input type="password" name="senhaOng" placeholder="Senha" required />
-    <input type="text" name="cidade" placeholder="Cidade" required />
-  
-    <button type="submit">Cadastrar</button>
-  </form>
+  <label for="senhaLogin">Senha (máx. 8 caracteres):</label>
+  <input type="password" id="senhaLogin" name="senhaLogin" placeholder="Senha" maxlength="8" required />
+  <small class="erro" id="erroSenhaLogin"></small>
+
+  <button type="submit">Entrar</button>
+</form>
+
+<h2>Cadastro ONG</h2>
+<form id="cadastroOng">
+  <label for="nomeOng">Nome da ONG:</label>
+  <input type="text" id="nomeOng" name="nomeOng" placeholder="Nome da ONG" required />
+  <small class="erro" id="erroNomeOng"></small>
+
+  <label for="emailOng">Email:</label>
+  <input type="email" id="emailOng" name="emailOng" placeholder="Email" required />
+  <small class="erro" id="erroEmailOng"></small>
+
+  <label for="senhaOng">Senha (máx. 8 caracteres):</label>
+  <input type="password" id="senhaOng" name="senhaOng" placeholder="Senha" maxlength="8" required />
+  <small class="erro" id="erroSenhaOng"></small>
+
+  <label for="cidade">Cidade:</label>
+  <input type="text" id="cidade" name="cidade" placeholder="Cidade" required />
+  <small class="erro" id="erroCidade"></small>
+
+  <button type="submit">Cadastrar</button>
+</form>
 
     
     </section>

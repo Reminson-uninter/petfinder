@@ -108,75 +108,150 @@
   </div>
 </footer>
 <script>
-  // 📦 Recupera o ID salvo no localStorage
-  const id = localStorage.getItem("petEditId");
-  if (!id) {
-    alert("ID inválido.");
+ // 📦 Recupera o ID salvo no localStorage
+const id = localStorage.getItem("petEditId");
+if (!id) {
+  alert("ID inválido.");
+  window.location.href = "cadastrados.html";
+}
+
+const listaPets = JSON.parse(localStorage.getItem("pets")) || [];
+const pet = listaPets.find(p => p.id.toString() === id);
+if (!pet) {
+  alert("Pet não encontrado.");
+  window.location.href = "cadastrados.html";
+}
+
+// ✏️ Preenche os campos do formulário
+document.getElementById("nome").value = pet.nome || "";
+document.getElementById("localizacao").value = pet.localiza || "";
+document.getElementById("tipo").value = pet.raca || "";
+document.getElementById("sexo").value = pet.sexo || "indefinido";
+document.getElementById("idade").value = pet.idade || "";
+document.getElementById("data").value = pet.data || "";
+document.getElementById("contato").value = pet.contato || "";
+document.getElementById("whatsapp").value = pet.whatsapp || "";
+document.getElementById("descricao").value = pet.descricao || "";
+document.getElementById("preview-imagem").src = pet.imagem || "";
+
+// 🔙 Botão de cancelar edição
+document.getElementById("cancelar-btn").addEventListener("click", function () {
+  if (confirm("Deseja cancelar a edição e voltar sem salvar?")) {
     window.location.href = "cadastrados.html";
   }
+});
 
-  const listaPets = JSON.parse(localStorage.getItem("pets")) || [];
-  const pet = listaPets.find(p => p.id.toString() === id);
-  if (!pet) {
-    alert("Pet não encontrado.");
-    window.location.href = "cadastrados.html";
-  }
+// 💾 Salvamento das alterações
+document.getElementById("form-edicao").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-  // ✏️ Preenche os campos do formulário
-  document.getElementById("nome").value = pet.nome || "";
-  document.getElementById("localizacao").value = pet.localiza || "";
-  document.getElementById("tipo").value = pet.raca || "";
-  document.getElementById("sexo").value = pet.sexo || "indefinido";
-  document.getElementById("idade").value = pet.idade || "";
-  document.getElementById("data").value = pet.data || "";
-  document.getElementById("contato").value = pet.contato || "";
-  document.getElementById("whatsapp").value = pet.whatsapp || "";
-  document.getElementById("descricao").value = pet.descricao || "";
-  document.getElementById("preview-imagem").src = pet.imagem || "";
+  removerErros();
 
-  // 🔙 Botão de cancelar edição
-  document.getElementById("cancelar-btn").addEventListener("click", function () {
-    if (confirm("Deseja cancelar a edição e voltar sem salvar?")) {
-      window.location.href = "cadastrados.html";
+  if (!confirm("Deseja realmente salvar as alterações?")) return;
+
+  // Atualiza os dados do pet
+ pet.nome = document.getElementById("nome").value.trim();
+pet.localiza = document.getElementById("localizacao").value.trim();
+pet.raca = document.getElementById("tipo").value.trim();
+pet.sexo = document.getElementById("sexo").value.trim();
+pet.idade = document.getElementById("idade").value.trim();
+pet.data = document.getElementById("data").value.trim();
+pet.contato = document.getElementById("contato").value.trim();
+pet.whatsapp = document.getElementById("whatsapp").value.trim();
+pet.descricao = document.getElementById("descricao").value.trim();
+pet.status = pet.status || "desaparecido";
+
+  let valido = true;
+
+  // Validação dos campos obrigatórios
+  const camposObrigatorios = [
+    "nome", "localiza", "raca", "sexo", "idade",
+    "data", "contato", "whatsapp"
+  ];
+
+  camposObrigatorios.forEach(campo => {
+    const valor = pet[campo];
+    if (!valor && valor !== 0) {
+      const input = document.getElementById(campo === "localiza" ? "localizacao" : campo);
+      mostrarErro(input, "Campo obrigatório.");
+      valido = false;
     }
   });
 
-  // 💾 Salvamento das alterações
-  document.getElementById("form-edicao").addEventListener("submit", function (e) {
-    e.preventDefault();
+  // Validação do campo "contato" como e-mail
+  const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(pet.contato);
+  if (!emailValido) {
+    mostrarErro(document.getElementById("contato"), "Insira um e-mail válido.");
+    valido = false;
+  }
 
-    if (!confirm("Deseja realmente salvar as alterações?")) return;
+  // Validação do campo "whatsapp" como número com 10 a 13 dígitos
+  const whatsappValido = /^\d{10,13}$/.test(pet.whatsapp);
+  if (!whatsappValido) {
+    mostrarErro(document.getElementById("whatsapp"), "Informe apenas números entre 10 e 13 dígitos.");
+    valido = false;
+  }
 
-    // Atualiza os dados do pet
-    pet.nome = document.getElementById("nome").value.trim();
-    pet.localiza = document.getElementById("localizacao").value.trim();
-    pet.raca = document.getElementById("tipo").value.trim();
-    pet.sexo = document.getElementById("sexo").value.trim();
-    pet.idade = document.getElementById("idade").value.trim();
-    pet.data = document.getElementById("data").value.trim();
-    pet.contato = document.getElementById("contato").value.trim();
-    pet.whatsapp = document.getElementById("whatsapp").value.trim();
-    pet.descricao = document.getElementById("descricao").value.trim();
+  // Validação do campo "data"
+  const dataInput = document.getElementById("data");
+  const dataFormatada = new Date(pet.data);
+  const hoje = new Date();
 
-    const imagemInput = document.getElementById("imagem");
-    if (imagemInput.files.length > 0) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        pet.imagem = e.target.result;
-        salvar();
-      };
-      reader.readAsDataURL(imagemInput.files[0]);
-    } else {
-      salvar();
-    }
+  if (isNaN(dataFormatada.getTime())) {
+    mostrarErro(dataInput, "Insira uma data válida.");
+    valido = false;
+  }
 
-    function salvar() {
-      localStorage.setItem("pets", JSON.stringify(listaPets));
-      alert("Pet atualizado com sucesso!");
-      window.location.href = "cadastrados.html";
-    }
-  });
+  if (dataFormatada > hoje) {
+    mostrarErro(dataInput, "A data não pode ser no futuro.");
+    valido = false;
+  }
 
+  if (!valido) return;
+
+  // Atualiza imagem se houver nova
+ const imagemInput = document.getElementById("imagem");
+const novaImagem = imagemInput.files[0];
+
+if (novaImagem) {
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    pet.imagem = e.target.result;
+    finalizarEdicao();
+  };
+  reader.readAsDataURL(novaImagem);
+} else {
+  finalizarEdicao();
+}
+
+function finalizarEdicao() {
+  localStorage.setItem("pets", JSON.stringify(listaPets));
+  alert("Pet atualizado com sucesso!");
+  window.location.href = "cadastrados.html";
+}
+});
+
+// 🔧 Funções auxiliares
+function mostrarErro(input, mensagem) {
+  const erro = document.createElement("small");
+  erro.classList.add("erro");
+  erro.textContent = mensagem;
+  input.insertAdjacentElement("afterend", erro);
+}
+
+function removerErros() {
+  document.querySelectorAll(".erro").forEach(el => el.remove());
+}
+document.getElementById("imagem").addEventListener("change", function () {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      document.getElementById("preview-imagem").src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+});
   
   
 </script>

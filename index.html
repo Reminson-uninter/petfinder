@@ -193,11 +193,12 @@ const statusColor = pet.status === 'encontrado'
         <div class="sumido">
           <strong>Status:</strong> <span style="color:${statusColor};"><strong>${statusTexto}</strong></span>
         </div>
-        <p><strong>Raça:</strong> ${pet.raca}</p>
+           <p><strong>ID:</strong> ${pet.id}</p>
+        <p><strong>Tipo:</strong> ${pet.raca}</p>
+        <p><strong>Sexo:</strong> ${pet.sexo}</p>
         <p><strong>Última localização:</strong> ${pet.localiza}</p>
         <p><strong>Data:</strong> ${pet.data}</p>
         <p><strong>Contato:</strong> ${pet.contato}</p>
-        <p>
           <a href="https://wa.me/55${pet.whatsapp?.replace(/\D/g, '')}" target="_blank" style="text-decoration: none; color: #25D366;">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:20px; vertical-align:middle; margin-right:5px;">
             Falar no WhatsApp

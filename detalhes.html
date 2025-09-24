@@ -5,148 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Detalhes do Pet</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="" />
-  <style>
-    /* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  <link rel="stylesheet" href="css/detalhes.css" />
 
-
-/* Corpo */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-  line-height: 1.6;
-}
-
-    /* Cabeçalho */
-    header {
-      position: fixed;
-      background-color: #ff751a;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      top: 0;
-      flex-wrap: wrap;
-    }
-
-    header h1 {
-      font-family: 'Fredoka One', sans-serif;
-      color: white;
-      font-size: 2.5rem;
-    }
-
-    /* Menu hamburguer */
-    .hamburger {
-      cursor: pointer;
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .hamburger span {
-      width: 25px;
-      height: 3px;
-      background-color: white;
-      border-radius: 2px;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-
-    nav a {
-      font-family: 'Fredoka One', sans-serif;
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    nav a:hover {
-      color: #ffd699;
-      background-color: rgba(255, 255, 255, 0.2);
-      padding: 5px 10px;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-    }
-
-nav a:hover {
-  color: #ffd699;
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 5px 10px;
-  border-radius: 5px;
-   transition: color 0.3s ease, background-color 0.3s ease;
-}
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
-
-  nav {
-    position: absolute;
-    top: 75px;
-    left: 0;
-    width: 100%;
-    background-color: #ff6600;
-    display: none;
-    flex-direction: column;
-  }
-
-  nav.active {
-    display: flex;
-  }
-
-  nav ul {
-    flex-direction: column;
-    padding: 10px 0;
-  }
-
-  nav li {
-    padding: 10px 20px;
-  }
-}
-    
-    .detalhes-container {
-      max-width: 500px;
-      margin: 150px auto 40px auto;
-      background-color: #fff;
-      padding: 0px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .detalhes-container img {
-      width: 100%;
-      border-radius: 8px;
-    }
-    .detalhes-container h2 {
-      margin: 15px;
-      font-size: 28px;
-      color: #333;
-    }
-    .detalhes-container p {
-      margin: 8px 10px;
-      font-size: 16px;
-    }
-    .voltar-btn {
-      margin: 10px;
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #ff6b6b;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      text-decoration: none;
-    }
-  </style>
 </head>
 <body>
 
@@ -159,7 +19,7 @@ nav a:hover {
     </div>
     <nav id="nav-menu">
       <ul>
-        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="Index.html">Página Inicial</a></li>
         <li><a href="animais_encontra.html">Encontrados</a></li>
         <li><a href="adocao.html" target="_blank">Adoção</a></li>
         <li><a href="">Dicas</a></li>
