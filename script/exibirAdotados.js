@@ -32,7 +32,7 @@ function exibir(pets) {
     img.src = pet.fotoPet || 'assets/img/default-pet.png';
     img.alt = `Foto de ${pet.nomePet}`;
     img.classList.add('foto-pet');
-   
+    img.style.width = '280px';
 
     const info = document.createElement('div');
     info.classList.add('info');
@@ -89,5 +89,4 @@ document.getElementById('btnLimpar').addEventListener('click', () => {
 });
 
 // Exibe todos ao carregar
-
 exibir(todosPets);
