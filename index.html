@@ -107,13 +107,13 @@ Juntos, podemos transformar perdas em reencontros e solidão em novos começos. 
         </div>
     </section>
   </main>
-<footer style="background-color: #ff914d; color: white; padding: 30px 0; font-family: 'Segoe UI', sans-serif;">
-  <div style="max-width: 1000px; margin: auto; text-align: center;">
+<footer>
+  <div style="max-width: 1000px; margin: auto;">
     <h3 style="margin-bottom: 10px;">🐶 PetFinder</h3>
     <p style="margin-bottom: 20px;">Conectando pets incríveis a lares amorosos 💕</p>
-    
+
     <div style="margin-bottom: 20px;">
-      <a href="https://www.instagram.com/peregrinosvet/" target="_blank" style="margin: 0 15px;">
+      <a href="https://www.instagram.com/seuusuario" target="_blank" style="margin: 0 15px;">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="32" height="32">
       </a>
       <a href="https://www.facebook.com/seuusuario" target="_blank" style="margin: 0 15px;">
@@ -126,7 +126,6 @@ Juntos, podemos transformar perdas em reencontros e solidão em novos começos. 
       <a href="adocao.html" style="color: white; margin: 0 10px; text-decoration: none;">Adoção</a> |
       <a href="dicas.html" style="color: white; margin: 0 10px; text-decoration: none;">Cuidados</a> |
       <a href="contato.html" style="color: white; margin: 0 10px; text-decoration: none;">Contato</a>
-     
     </nav>
 
     <p style="font-size: 14px;">© 2025 PetFinder. Todos os direitos reservados.</p>
@@ -182,8 +181,11 @@ function exibirPets() {
       card.style.overflow = 'hidden';
       card.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
 
-      const statusColor = pet.status === 'encontrado' ? '' : '#ff6600';
-      const statusTexto = pet.status ? pet.status.toUpperCase() : 'DESAPARECIDO';
+   const statusTexto = pet.status ? pet.status.toUpperCase() : 'DESAPARECIDO';
+
+const statusColor = pet.status === 'encontrado'
+  ? '#4CAF50' // verde para encontrado
+  : '#ff6600'; // laranja para desaparecido ou outro status
 
       card.innerHTML = `
         <img src="${pet.imagem}" alt="Imagem do pet" style="width:100%; height:auto; border-radius:5px;">

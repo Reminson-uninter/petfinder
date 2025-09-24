@@ -31,7 +31,7 @@
   <main>
     <section class="contact-section">
       <h1>Fale Conosco</h1>
-      <form class="contact-form" >
+      <form class="contact-form" action="https://api.sheetmonkey.io/form/ozqbywstCFtqeGFHNboP5p" method="post" id="contactForm">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" required />
 
@@ -42,6 +42,8 @@
         <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
 
         <button type="submit">Enviar</button>
+        <p id="mensagemStatus"></p>
+
       </form>
     </section>
 
@@ -56,11 +58,11 @@
     </section>
   </main>
 
-<footer style="background-color: #ff914d; color: white; padding: 30px 0; font-family: 'Segoe UI', sans-serif;">
-  <div style="max-width: 1000px; margin: auto; text-align: center;">
+<footer>
+  <div style="max-width: 1000px; margin: auto;">
     <h3 style="margin-bottom: 10px;">🐶 PetFinder</h3>
     <p style="margin-bottom: 20px;">Conectando pets incríveis a lares amorosos 💕</p>
-    
+
     <div style="margin-bottom: 20px;">
       <a href="https://www.instagram.com/seuusuario" target="_blank" style="margin: 0 15px;">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="32" height="32">
@@ -90,7 +92,6 @@
       nav.classList.toggle('active');
     });
   </script>
-  <script src="script/sheet.js"></script>
+ 
 </body>
 </html>
-

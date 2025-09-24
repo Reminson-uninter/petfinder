@@ -171,7 +171,11 @@
 </header>
   <div class="form-container">
     <h2>🐾 Publicar Animal Encontrado</h2>
-    <form>
+ <form id="formPet">
+
+      <label for="nome">Nome (se conhecido):</label>
+      <input type="text" id="nome" name="nome" placeholder="Ex: Bob, Luna">
+
       <label for="tipo">Tipo de Animal:</label>
       <select id="tipo" name="tipo">
         <option value="cachorro">Cachorro</option>
@@ -227,20 +231,96 @@
     <p style="font-size: 14px;">© 2025 PetFinder. Todos os direitos reservados.</p>
   </div>
 </footer>
-  
+
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  exibirPets(); // ← Chamada da função aqui
+ document.addEventListener('DOMContentLoaded', () => {
+    // Menu responsivo
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav-menu');
+    hamburger.addEventListener('click', () => nav.classList.toggle('active'));
 
-  const hamburger = document.getElementById('hamburger');
-  const nav = document.getElementById('nav-menu');
+    // IndexedDB setup
+    let db = null;
+    let bancoPronto = false;
 
-  hamburger.addEventListener('click', () => {
-    nav.classList.toggle('active');
+    const dbRequest = indexedDB.open('PetFinderDB', 1);
+
+    dbRequest.onupgradeneeded = function(event) {
+      db = event.target.result;
+      if (!db.objectStoreNames.contains('petsEncontrados')) {
+        db.createObjectStore('petsEncontrados', { keyPath: 'id' });
+      }
+    };
+
+    dbRequest.onsuccess = function(event) {
+      db = event.target.result;
+      bancoPronto = true;
+    };
+
+    dbRequest.onerror = function() {
+      alert('Erro ao abrir o banco de dados.');
+    };
+
+    // Formulário de publicação
+    const form = document.getElementById('formPet');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      if (!bancoPronto || !db) {
+        alert('Erro ao acessar o banco de dados. Tente recarregar a página.');
+        return;
+      }
+
+      const pet = {
+        id: 'encontrado-' + Date.now(),
+        nomePet: document.getElementById('nome').value.trim(),
+        tipoPet: document.getElementById('tipo').value,
+        descricaoPet: document.getElementById('descricao').value.trim(),
+        localizacao: document.getElementById('local').value.trim(),
+        dataEncontrado: document.getElementById('data').value,
+        contato: document.getElementById('contato').value.trim(),
+        whatsapp: document.getElementById('whatsapp').value.trim()
+      };
+
+      const foto = document.getElementById('foto').files[0];
+      if (foto) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          pet.fotoPet = e.target.result;
+          salvarPet(pet);
+        };
+        reader.onerror = function() {
+          alert('Erro ao carregar a imagem.');
+        };
+        reader.readAsDataURL(foto);
+      } else {
+        pet.fotoPet = '';
+        salvarPet(pet);
+      }
+
+      function salvarPet(pet) {
+        try {
+          const tx = db.transaction('petsEncontrados', 'readwrite');
+          const store = tx.objectStore('petsEncontrados');
+          store.put(pet);
+
+          tx.oncomplete = () => {
+            alert('Animal publicado com sucesso!');
+            window.location.href = 'animais_encontra.html';
+          };
+
+          tx.onerror = () => {
+            alert('Erro ao salvar o animal. Verifique os dados e tente novamente.');
+          };
+        } catch (err) {
+          console.error('Erro na transação:', err);
+          alert('Erro ao acessar o banco de dados. Tente recarregar a página.');
+        }
+      }
+    });
   });
-  </script>
+
+</script>
+
 </body>
-
 </html>
-
-

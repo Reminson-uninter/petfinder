@@ -85,6 +85,34 @@ nav a:hover {
   border-radius: 5px;
    transition: color 0.3s ease, background-color 0.3s ease;
 }
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  nav {
+    position: absolute;
+    top: 75px;
+    left: 0;
+    width: 100%;
+    background-color: #ff6600;
+    display: none;
+    flex-direction: column;
+  }
+
+  nav.active {
+    display: flex;
+  }
+
+  nav ul {
+    flex-direction: column;
+    padding: 10px 0;
+  }
+
+  nav li {
+    padding: 10px 20px;
+  }
+}
     
     .detalhes-container {
       max-width: 500px;
@@ -131,7 +159,7 @@ nav a:hover {
     </div>
     <nav id="nav-menu">
       <ul>
-        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="Index.html">Página Inicial</a></li>
         <li><a href="animais_encontra.html">Encontrados</a></li>
         <li><a href="adocao.html" target="_blank">Adoção</a></li>
         <li><a href="">Dicas</a></li>
@@ -161,7 +189,7 @@ nav a:hover {
     </div>
 
     <nav style="margin-bottom: 15px;">
-      <a href="index.html" style="color: white; margin: 0 10px; text-decoration: none;">Página Inicial</a> |
+      <a href="Index.html" style="color: white; margin: 0 10px; text-decoration: none;">Página Inicial</a> |
       <a href="adocao.html" style="color: white; margin: 0 10px; text-decoration: none;">Adoção</a> |
       <a href="dicas.html" style="color: white; margin: 0 10px; text-decoration: none;">Cuidados</a> |
       <a href="contato.html" style="color: white; margin: 0 10px; text-decoration: none;">Contato</a>
@@ -206,8 +234,4 @@ nav a:hover {
   </script>
 
 </body>
-
 </html>
-
-
-
