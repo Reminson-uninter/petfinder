@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
   exibirPets(); // ← Chamada da função aqui
 
   const hamburger = document.getElementById('hamburger');
@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   hamburger.addEventListener('click', () => {
     nav.classList.toggle('active');
   });
+})
 
 
 
@@ -82,5 +83,6 @@ function exibirPets() {
 
 
 window.addEventListener('DOMContentLoaded', exibirPets);
+
 
 
