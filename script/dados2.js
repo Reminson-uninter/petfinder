@@ -1,3 +1,16 @@
+// Função para gerar um ID único de 4 dígitos
+function gerarIdPet() {
+  const listaPets = JSON.parse(localStorage.getItem('pets')) || [];
+  let novoId;
+
+  do {
+    novoId = Math.floor(1000 + Math.random() * 9000); // entre 1000 e 9999
+  } while (listaPets.some(pet => pet.id === novoId));
+
+  return novoId;
+}
+
+// Cadastro do pet
 document.querySelector('#form-container').addEventListener('submit', function(event) {
   event.preventDefault();
 
@@ -13,20 +26,20 @@ document.querySelector('#form-container').addEventListener('submit', function(ev
 
   reader.onload = function(e) {
     const pet = {
-      id: Date.now().toString().slice(-6), // Gera ID unico
-      nome: document.getElementById('nome').value,
-      localiza: document.getElementById('localizacao').value,
-      raca: document.getElementById('tipo').value,
-      sexo: document.getElementById('sexo').value,
-      idade: document.getElementById('idade').value.trim(), // ✅ corrigido
-      data: document.getElementById('data').value,
-      contato: document.getElementById('contato').value,
-      whatsapp: document.getElementById('whatsapp').value,
-      descricao: document.getElementById('descricao').value,
-      imagem: e.target.result
+      id: gerarIdPet(),
+      nome: document.getElementById("nome").value.trim(),
+      localiza: document.getElementById("localizacao").value.trim(),
+      raca: document.getElementById("tipo").value.trim(),
+      sexo: document.getElementById("sexo").value.trim(),
+      idade: document.getElementById("idade").value.trim(),
+      data: document.getElementById("data").value.trim(),
+      contato: document.getElementById("contato").value.trim(),
+      whatsapp: document.getElementById("whatsapp").value.trim(),
+      descricao: document.getElementById("descricao").value.trim(),
+      imagem: e.target.result,
+      status: "desaparecido"
     };
 
-    // Validação simples (exceto descrição, que é opcional)
     const camposObrigatorios = [
       'nome', 'localiza', 'raca', 'sexo', 'idade',
       'data', 'contato', 'whatsapp', 'imagem'
@@ -42,7 +55,7 @@ document.querySelector('#form-container').addEventListener('submit', function(ev
     listaPets.push(pet);
     localStorage.setItem('pets', JSON.stringify(listaPets));
 
-    alert('Pet cadastrado com sucesso!');
+    alert(`Pet cadastrado com sucesso! Código de rastreio: ${pet.id}`);
     document.getElementById('form-container').reset();
 
     setTimeout(() => {

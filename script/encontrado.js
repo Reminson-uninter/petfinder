@@ -1,8 +1,3 @@
-
-
-
-
-
 function exibirPets() {
   const listaPets = JSON.parse(localStorage.getItem('pets')) || [];
   const container = document.querySelector('.container-cards');
@@ -72,8 +67,4 @@ function exibirPets() {
   });
 }
 
-
 window.addEventListener('DOMContentLoaded', exibirPets);
-
-
-
