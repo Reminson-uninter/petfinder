@@ -72,6 +72,7 @@ main {
 
 /* Galeria de Adoção */
 .galeria-adocao h1 {
+  
   text-align: center;
   font-size: 2.5em;
   color: #ff914d;
@@ -81,7 +82,7 @@ main {
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
   gap: 30px;
 }
 
@@ -95,6 +96,14 @@ main {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   overflow: hidden;
   transition: transform 0.3s ease;
+}
+.animal-card .info p,
+.animal-card .info h3 {
+  margin: 8px 0;
+  line-height: 1.4;
+}
+.animal-card .info {
+  text-align: left;
 }
 
 .animal-card:hover {
@@ -207,6 +216,37 @@ main {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   }
 }
+@media screen and (max-width: 900px) and (max-height: 500px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  nav a {
+    padding: 8px 12px;
+    font-size: 1rem;
+  }
+
+  .hamburger {
+    align-self: flex-end;
+  }
+}
+
+
+
 footer {
   background-color: #ff751a; /* mesma cor do cabeçalho */
   color: white;
