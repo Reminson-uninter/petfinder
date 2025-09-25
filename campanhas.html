@@ -226,6 +226,13 @@ p<!DOCTYPE html>
     margin-top: 10px;
     font-weight: bold;
   }
+  button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+  border: none;
+}
 </style>
 </head>
 <body>
@@ -257,7 +264,7 @@ p<!DOCTYPE html>
        <p>Cada compra gera uma doação para cães e gatos resgatados.</p>
        <p><strong>Meta:</strong> 5 toneladas de ração</p>
        <p><strong>Progresso:</strong> 3.2 toneladas</p>
-       <button class="btn">Quero Ajudar</button>
+       <button disabled class="btn">Quero Ajudar</button>
      </div>
    </div>
     </section>
@@ -305,8 +312,8 @@ p<!DOCTYPE html>
   <div class="card">
     <ol>
       <li>Espalhe cartazes na vizinhança <button class="btn"><a href="https://br.freepik.com/vetores/cartaz-animal-perdido">Baixar Modelo</a></button></li>
-      <li>Use as redes sociais para ampliar o alcance <button class="btn">Compartilhar</button></li>
-      <li>Cadastre seu pet perdido no PetFinder <button class="btn">Publicar Animal</button></li>
+      <li>Use as redes sociais para ampliar o alcance <button disabled class="btn">Compartilhar</button></li>
+      <li>Cadastre seu pet perdido no PetFinder <button disabled class="btn">Publicar Animal</button></li>
     </ol>
   </div>
 </section>
