@@ -413,53 +413,14 @@ nav {
 body {
   overflow-x: hidden;
 }
-/* Menu hamburguer */
-.hamburger {
-  cursor: pointer;
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  z-index: 1001;
-}
-
-.hamburger span {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  border-radius: 2px;
-}
-
-/* Menu padrão */
-nav {
-  display: flex;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-/* Responsivo para mobile */
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
-
+@media screen and (orientation: landscape) and (max-width: 768px) {
   nav {
     position: fixed;
     top: 60px;
     left: 0;
     width: 100%;
     background-color: #ff6600;
-    display: none;
-    flex-direction: row; /* horizontal */
-    justify-content: center;
     z-index: 999;
-  }
-
-  nav.active {
-    display: flex;
   }
 
   nav ul {
@@ -467,14 +428,12 @@ nav ul {
     flex-wrap: wrap;
     justify-content: center;
     padding: 10px;
-    gap: 10px;
   }
 
   nav li {
     padding: 8px 12px;
   }
-
-  nav li:not(:last-child) {
-    border-right: 1px solid rgba(255, 255, 255, 0.3);
-  }
+}
+input, select, textarea {
+  font-size: 16px; /* evita zoom automático no iOS */
 }
