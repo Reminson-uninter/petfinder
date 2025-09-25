@@ -1,4 +1,4 @@
-p<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -166,13 +166,13 @@ p<!DOCTYPE html>
 
     nav {
       position: absolute;
-      top: 70px;
+      top: 80px;
       left: 0;
       width: 100%;
       background-color: #ff751a;
       display: none;
       flex-direction: column;
-      align-items: center;
+      align-items: left;
       padding: 20px 0;
     }
 
@@ -225,6 +225,9 @@ p<!DOCTYPE html>
     text-align: left;
     margin-top: 10px;
     font-weight: bold;
+  }
+     nav li:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   }
   button:disabled {
   background-color: #ccc;
@@ -326,7 +329,7 @@ p<!DOCTYPE html>
       <li>5 sinais de que seu gato está estressado</li>
       <li>Vacinação: o que todo tutor precisa saber</li>
     </ul>
-    <button class="btn">Ver Todos os Artigos</button>
+    <button disabled class="btn">Ver Todos os Artigos</button>
   </div>
 </section>
 
