@@ -61,6 +61,18 @@ main {
   border-radius: 5px;
   cursor: pointer;
 }
+#action-btn{
+display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+
+}
 
 .campaign-list {
   display: flex;
