@@ -260,10 +260,11 @@ footer {
   font-family: 'Segoe UI', sans-serif;
   text-align: center;
 }
-@media screen and (max-width: 900px) and (max-height: 500px) {
+@media screen and (max-width: 900px) and (max-height: 200px) {
   header {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
+    flex-wrap: wrap;
     padding: 10px;
   }
 
@@ -274,14 +275,14 @@ footer {
   }
 
   nav ul {
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
     gap: 10px;
   }
 
   nav a {
     padding: 8px 12px;
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .hamburger {
