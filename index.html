@@ -57,7 +57,7 @@ Juntos, podemos encher potes e corações.
       </div>
       <div class="highlight-box" id="adocoes">
         <h2>Adoções Recentes</h2>
-        <div class="placeholder"><a href="campanhas.html"><img src="assets/img/adoção.jpg" alt=""></a></div><br><br>
+        <div class="placeholder"><img src="assets/img/adoção.jpg" alt=""></div><br><br>
               <p>
           <h3>🐾Do Asfalto ao Abraço</h3>
         </p>
@@ -70,7 +70,7 @@ Adoções que transformam vidas — humanas e caninas.
       </div>
       <div class="highlight-box" id="dicas">
         <h2>Dicas</h2>
-        <div class="placeholder"> <a href="campanhas.html"> <img src="assets/img/dicas01.jpg" alt=""></a> </div><br>
+        <div class="placeholder"><img src="assets/img/dicas01.jpg" alt=""></div><br>
               <p>
           <h3>🐾Como encontrar seu pet</h3>
         </p>
@@ -136,13 +136,13 @@ Juntos, podemos transformar perdas em reencontros e solidão em novos começos. 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   exibirPets(); // ← Chamada da função aqui
-
   const hamburger = document.getElementById('hamburger');
   const nav = document.getElementById('nav-menu');
 
   hamburger.addEventListener('click', () => {
     nav.classList.toggle('active');
   });
+
 
   document.getElementById('action-btn').addEventListener('click', () => {
     const usuarioLogado = localStorage.getItem('usuarioLogado');
@@ -226,7 +226,6 @@ const statusColor = pet.status === 'encontrado'
 }
 
 </script>
-
+<script src="mobile-"></script>
 </body>
-
 </html>
