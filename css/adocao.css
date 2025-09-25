@@ -9,7 +9,7 @@
 
 /* Corpo */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: #f4f4f4;
   color: #333;
   line-height: 1.6;
@@ -17,31 +17,32 @@ body {
 
 /* Cabeçalho */
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   background-color: #ff751a;
   padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
-  flex-wrap: wrap;
+  z-index: 1000;
 }
 
 header h1 {
   font-family: 'Fredoka One', sans-serif;
   color: white;
   font-size: 2.5rem;
+  margin: 0;
 }
 
 /* Menu hamburguer */
-
 .hamburger {
   cursor: pointer;
   display: none;
   flex-direction: column;
   gap: 5px;
-  position: absolute;
-  right: 20px;
-  top: 20px;
+  z-index: 1001;
 }
 
 .hamburger span {
@@ -51,6 +52,7 @@ header h1 {
   border-radius: 2px;
 }
 
+/* Navegação */
 nav ul {
   list-style: none;
   display: flex;
@@ -62,6 +64,7 @@ nav a {
   color: white;
   text-decoration: none;
   font-weight: 500;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 nav a:hover {
@@ -69,18 +72,15 @@ nav a:hover {
   background-color: rgba(255, 255, 255, 0.2);
   padding: 5px 10px;
   border-radius: 5px;
-  transition: all 0.3s ease;
 }
 
-button:focus-visible,
-nav a:focus-visible {
-  outline: 2px solid #ffd699;
-  outline-offset: 4px;
-}
-
+/* Conteúdo principal */
 main {
   padding: 40px;
+  margin-top: 80px; /* espaço para o header fixo */
 }
+
+/* Galeria de adoção */
 .titulo-centralizado {
   text-align: center;
   display: flex;
@@ -148,6 +148,7 @@ main {
   transform: scale(1.03);
 }
 
+/* Regras */
 .rules {
   margin-top: 60px;
   background-color: #ffe1cc;
@@ -174,6 +175,7 @@ main {
   margin-bottom: 10px;
 }
 
+/* Formulário */
 #formAdocao {
   display: flex;
   flex-direction: column;
@@ -198,17 +200,14 @@ main {
   background-color: rgba(255, 255, 255, 0.76);
   border-radius: 20px;
   outline: none;
-  border: 2px solid #ccc; /* ← cor corrigida */
+  border: 2px solid #ccc;
   padding: 10px;
   font-size: 15px;
   color: #616161;
   transition: all 0.4s ease;
-}
-#formAdocao input,
-#formAdocao textarea,
-#formAdocao select {
   font-family: 'Poppins', sans-serif;
 }
+
 #formAdocao textarea {
   min-height: 100px;
   resize: vertical;
@@ -232,12 +231,12 @@ main {
   color: white;
   cursor: pointer;
   font-size: 16px;
+  transition: all 0.3s ease;
 }
 
 #formAdocao button:hover {
   background-color: #ff3333;
   transform: scale(1.03);
-  transition: all 0.3s ease;
 }
 
 input:focus,
@@ -246,69 +245,23 @@ select:focus {
   border-color: #cc283569;
 }
 
+/* Informações de adoção */
 .info-adocao {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 40px 20px;
   background-color: #fdfdfd71;
-  font-family: 'Poppins', sans-serif;
   font-size: 1.1em;
   text-align: justify;
-  margin-bottom: 20px;
-  width: 450px;
   margin: 0 auto 40px auto;
+  width: 450px;
 }
 
 .info-adocao h2,
 .info-adocao h3 {
   color: #ff751a;
   margin-bottom: 15px;
-}
-
-/* Menu padrão escondido em telas pequenas */
-@media (max-width: 768px) {
-  #nav-menu {
-    display: none;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-  }
-
-  #nav-menu.active {
-    display: flex;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-
-  nav ul {
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px 0;
-  }
-
-  .animal-card {
-    width: 100%;
-  }
-
-  .info-adocao,
-  #formAdocao {
-    width: 100%;
-    padding: 15px;
-  }
-
-  .rules {
-    padding: 20px;
-  }
-
-  header h1 {
-    font-size: 2rem;
-  }
-  nav li:not(:last-child) {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  }
 }
 
 /* Telas médias */
@@ -323,44 +276,89 @@ select:focus {
   }
 }
 
-/* Orientação paisagem */
-@media screen and (orientation: landscape) and (max-width: 768px) {
-  header {
-    flex-direction: row;
-    justify-content: space-between;
+/* Telas pequenas e horizontais */
+@media screen and (max-width: 900px) and (max-height: 500px),
+       screen and (max-height: 500px) and (min-width: 600px),
+       screen and (max-width: 600px) and (max-height: 700px) {
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    padding: 10px;
   }
 
-  .gallery {
-    flex-direction: row;
-    flex-wrap: wrap;
+  .hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+    transition: 0.3s;
   }
 
-  .animal-card {
-    width: 45%;
-  }
-}
-
-/* Orientação retrato */
-@media screen and (orientation: portrait) and (max-width: 768px) {
-  header {
+  nav {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #ff751a;
+    display: none;
     flex-direction: column;
     align-items: flex-start;
+    padding: 20px;
+    z-index: 998;
   }
 
-  .gallery {
+  nav.active {
+    display: flex;
+  }
+
+  nav ul {
     flex-direction: column;
-    align-items: center;
-  }
-
-  .animal-card {
+    gap: 15px;
     width: 100%;
   }
-}
-/* Rodapé */
-footer {
-  background-color: #ff751a; /* mesma cor do cabeçalho */
-  color: white;
-  padding: 30px 0;
-  font-family: 'Segoe UI', sans-serif;
-  text-align: center;
+
+  nav li {
+    width: 100%;
+  }
+
+  nav a {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    text-align: left;
+  }
+
+  nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffd699;
+    border-radius: 5px;
+  }
+
+  nav li:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .highlight-box {
+    width: 90%;
+  }
+
+  .texto1 {
+    font-size: 0.9rem;
+  }
+
+  .voltar-btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 1rem;
+  }
 }

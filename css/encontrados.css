@@ -29,12 +29,12 @@ footer {
   text-align: center;
 }
 header {
-  background-color:  #ff751a;
-  padding: 15px 20px;
+  background-color: #ff751a;
+  padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
+  flex-wrap: wrap;
 }
 
 .hamburger {
@@ -511,3 +511,110 @@ footer {
     font-size: 0.9rem;
   }
 }
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+/* Responsividade geral para telas pequenas e horizontais */
+@media screen and (max-width: 900px), screen and (max-height: 500px) {
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  .hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+    transition: 0.3s;
+  }
+
+  nav {
+    position: absolute;
+    top: 70px; /* ajustado para não sobrepor o header */
+    left: 0;
+    width: 100%;
+    background-color: #ff751a;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    z-index: 998;
+  }
+
+  nav.active {
+    display: flex;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+
+  nav li {
+    width: 100%;
+  }
+
+  nav a {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-family: 'Fredoka One', sans-serif;
+    font-weight: 500;
+    text-align: left;
+  }
+
+  nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffd699;
+    border-radius: 5px;
+  }
+
+  nav li:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .highlights,
+  .about-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pet-card {
+    width: 100%;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+    margin-top: 0;
+  }
+
+  nav a {
+    font-size: 0.9rem;
+  }
+
+  .highlight-box {
+    width: 90%;
+  }
+
+  .texto1 {
+    font-size: 0.9rem;
+  }
+
+  .voltar-btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
