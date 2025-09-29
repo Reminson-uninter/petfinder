@@ -1,4 +1,4 @@
-p<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -75,6 +75,52 @@ p<!DOCTYPE html>
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   }
+  .adocoes-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .animal-card {
+    display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border: 2px solid #29cf19;
+  border-radius: 12px;
+  width: 300px;
+  height: auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  margin: 10px;
+  padding: 10px;
+  justify-content: space-between;
+  }
+  .animal-card:hover {
+  transform: scale(1.05);
+}
+
+.animal-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+#foto-pet{
+  width: 150px;
+  height: 150px;
+  border-radius: 10%;
+  margin: 5px;
+  object-fit: cover;
+  border: 1px solid #29cf19;
+}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+} 
 
   .btn {
     background: #4CAF50;
@@ -120,13 +166,13 @@ p<!DOCTYPE html>
 
     nav {
       position: absolute;
-      top: 70px;
+      top: 80px;
       left: 0;
       width: 100%;
       background-color: #ff751a;
       display: none;
       flex-direction: column;
-      align-items: center;
+      align-items: left;
       padding: 20px 0;
     }
 
@@ -175,6 +221,21 @@ p<!DOCTYPE html>
     color: white;
     text-decoration: none;
   }
+  .descricao {
+    text-align: left;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+     nav li:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+  border: none;
+}
 </style>
 </head>
 <body>
@@ -188,7 +249,7 @@ p<!DOCTYPE html>
     </div>
     <nav id="nav-menu">
       <ul>
-        <li><a href="Index.html">Página Inicial</a></li>
+        <li><a href="index.html">Página Inicial</a></li>
         <li><a href="animais_encontra.html">Encontrados</a></li>
         <li><a href="adocao.html" target="_blank">Adoção</a></li>
         <li><a href="dicas.html">Dicas</a></li>
@@ -200,21 +261,53 @@ p<!DOCTYPE html>
   </header>
 
 <section>
-  <h2>🎉 Campanha em Destaque: Alimente o Amor</h2>
-  <div class="card">
-    <p>Cada compra gera uma doação para cães e gatos resgatados.</p>
-    <p><strong>Meta:</strong> 5 toneladas de ração</p>
-    <p><strong>Progresso:</strong> 3.2 toneladas</p>
-    <button class="btn">Quero Ajudar</button>
-  </div>
-</section>
+  <div class="campanha-container">
+    <h2>🎉 Campanha em Destaque: Alimente o Amor</h2>
+     <div class="card">
+       <p>Cada compra gera uma doação para cães e gatos resgatados.</p>
+       <p><strong>Meta:</strong> 5 toneladas de ração</p>
+       <p><strong>Progresso:</strong> 3.2 toneladas</p>
+       <button disabled class="btn">Quero Ajudar</button>
+     </div>
+   </div>
+    </section>
+
 
 <section>
   <h2>🐶🐱 Adoções Recentes</h2>
-  <div class="card">
-    <p><strong>João & Mel:</strong> Juntos transformam vidas — humanas e animais.</p>
-    <button class="btn">Ver Mais Histórias</button>
+  <div class="adocoes-container">
+    
+    <div class="gallery">
+      <div class="animal-card">
+        <img src="assets/img/pet de oculos.jpg" id="foto-pet" alt="Animal para adoção" />
+        <div class="info">
+              <h3>Nome: Rick</h3>
+          <p><span style="font-weight: bold; color: #2E8B57;">Idade:</span> 2 anos</p>
+          <p ><span style="font-weight: bold; color: #2E8B57;">Porte</span>: Grande</p>
+          <p><span style="font-weight: bold; color: #2E8B57;"style="font-weight: bold; color: #2E8B57;">Temperamento:</span>Gentil e afetuoso
+</p>
+         <p>Descrição: Rick é o tipo de companheiro que transforma qualquer dia comum em uma aventura divertida. Extremamente brincalhão, ele adora correr, explorar e interagir com pessoas e outros animais. Apesar do porte grande, é super dócil e carinhoso, sempre pronto para receber um cafuné ou deitar ao seu lado.
+           Ideal para famílias ativas ou quem busca um amigo leal e cheio de energia positiva.</p>
+        </div>
+      </div>
+    </div>
+ 
+
+  <div class="gallery">
+      <div class="animal-card">
+        <img src="assets/img/american.png" id="foto-pet" alt="Animal para adoção" />
+        <div class="info">
+          <h3><span >Nome:</span> Nina</h3>
+          <p><span style="font-weight: bold; color: #2E8B57;" >Idade:</span> 2 anos</p>
+          <p><span style="font-weight: bold; color: #2E8B57;">Porte:</span> Médio</p>
+          <p><span style="font-weight: bold; color: #2E8B57;">Temperamento:</span> dócil e brincalhona</p>
+         <p><span style="font-weight: bold; color: #2E8B57;">Descrição:</span></p>
+          
+        </div>
+      </div>
+    </div>
   </div>
+ </div>  
 </section>
 
 <section>
@@ -222,8 +315,8 @@ p<!DOCTYPE html>
   <div class="card">
     <ol>
       <li>Espalhe cartazes na vizinhança <button class="btn"><a href="https://br.freepik.com/vetores/cartaz-animal-perdido">Baixar Modelo</a></button></li>
-      <li>Use as redes sociais para ampliar o alcance <button class="btn">Compartilhar</button></li>
-      <li>Cadastre seu pet perdido no PetFinder <button class="btn">Publicar Animal</button></li>
+      <li>Use as redes sociais para ampliar o alcance <button disabled class="btn">Compartilhar</button></li>
+      <li>Cadastre seu pet perdido no PetFinder <button disabled class="btn">Publicar Animal</button></li>
     </ol>
   </div>
 </section>
@@ -236,7 +329,7 @@ p<!DOCTYPE html>
       <li>5 sinais de que seu gato está estressado</li>
       <li>Vacinação: o que todo tutor precisa saber</li>
     </ul>
-    <button class="btn">Ver Todos os Artigos</button>
+    <button disabled class="btn">Ver Todos os Artigos</button>
   </div>
 </section>
 
@@ -264,7 +357,7 @@ p<!DOCTYPE html>
     </div>
 
     <nav style="margin-bottom: 15px;">
-      <a href="Index.html" style="color: white; margin: 0 10px; text-decoration: none;">Página Inicial</a> |
+      <a href="index.html" style="color: white; margin: 0 10px; text-decoration: none;">Página Inicial</a> |
       <a href="adocao.html" style="color: white; margin: 0 10px; text-decoration: none;">Adoção</a> |
       <a href="dicas.html" style="color: white; margin: 0 10px; text-decoration: none;">Cuidados</a> |
       <a href="contato.html" style="color: white; margin: 0 10px; text-decoration: none;">Contato</a>

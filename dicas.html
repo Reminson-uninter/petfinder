@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dicas para Cuidar do Seu Pet | PetFinder</title>
+   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dicas.css">
+ 
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header>
+    <h1>🐾 PetFinder</h1>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="animais_encontra.html">Encontrados</a></li>
+        <li><a href="adocao.html" target="_blank">Adoção</a></li>
+        <li><a href="dicas.html">Dicas</a></li>
+        <li><a href="cadastrados.html">Pets Cadastrados</a></li>
+        <li><a href="contato.html">Contato</a></li>
+         <li><a href="login_ong.html">Área da ONG</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo" aria-labelledby="titulo-principal">
+    <section class="grid" aria-label="Categorias de Dicas">
+      <!-- Saúde -->
+      <article class="card">
+        <h2 id="titulo-principal">🩺 Saúde</h2>
+        <ul>
+          <li>Vacinação em dia para proteção contra doenças graves.</li>
+          <li>Vermifugação regular para evitar parasitas internos.</li>
+          <li>Consultas veterinárias anuais para check-up.</li>
+          <li>Higiene bucal com escovação ou produtos específicos.</li>
+        </ul>
+      </article>
+
+      <!-- Alimentação -->
+      <article class="card">
+        <h2>🍽️ Alimentação</h2>
+        <ul>
+          <li>Ração de qualidade conforme idade e porte.</li>
+          <li>Evite alimentos humanos tóxicos como chocolate e cebola.</li>
+          <li>Água fresca sempre disponível.</li>
+          <li>Petiscos com moderação como recompensa.</li>
+        </ul>
+      </article>
+
+      <!-- Viagens com Pets -->
+      <article class="card">
+        <h2>✈️ Viagens com Pets</h2>
+        <ul>
+          <li>Use caixas de transporte ou cintos específicos.</li>
+          <li>Leve carteira de vacinação e atestado de saúde.</li>
+          <li>Leve brinquedos e objetos familiares para adaptação.</li>
+          <li>Nunca deixe o pet sozinho no carro.</li>
+        </ul>
+      </article>
+
+      <!-- Bem-estar e Comportamento -->
+      <article class="card">
+        <h2>🧘‍♂️ Bem-estar e Comportamento</h2>
+        <ul>
+          <li>Exercícios diários e estímulos mentais.</li>
+          <li>Socialização com outros animais e pessoas.</li>
+          <li>Ambiente seguro e confortável com cama e brinquedos.</li>
+          <li>Use reforço positivo para ensinar comandos.</li>
+        </ul>
+      </article>
+
+      <!-- Cuidados Especiais -->
+      <article class="card">
+        <h2>🐾 Cuidados Especiais</h2>
+        <ul>
+          <li>Adapte o ambiente para pets idosos.</li>
+          <li>Filhotes exigem atenção redobrada e socialização precoce.</li>
+          <li>Pets com necessidades especiais precisam de suporte veterinário.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+<footer>
+  <div style="max-width: 1000px; margin: auto;">
+    <h3 style="margin-bottom: 10px;">🐶 PetFinder</h3>
+    <p style="margin-bottom: 20px;">Conectando pets incríveis a lares amorosos 💕</p>
+
+    <div style="margin-bottom: 20px;">
+      <a href="https://www.instagram.com/seuusuario" target="_blank" style="margin: 0 15px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="32" height="32">
+      </a>
+      <a href="https://www.facebook.com/seuusuario" target="_blank" style="margin: 0 15px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="32" height="32">
+      </a>
+    </div>
+
+    <nav style="margin-bottom: 15px;">
+      <a href="index.html" style="color: white; margin: 0 10px; text-decoration: none;">Página Inicial</a> |
+      <a href="adocao.html" style="color: white; margin: 0 10px; text-decoration: none;">Adoção</a> |
+      <a href="dicas.html" style="color: white; margin: 0 10px; text-decoration: none;">Cuidados</a> |
+      <a href="contato.html" style="color: white; margin: 0 10px; text-decoration: none;">Contato</a>
+    </nav>
+
+    <p style="font-size: 14px;">© 2025 PetFinder. Todos os direitos reservados.</p>
+  </div>
+</footer>
+  <script>
+        const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav-menu');
+
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

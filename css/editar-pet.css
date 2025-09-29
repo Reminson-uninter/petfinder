@@ -1,0 +1,194 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', 'Fredoka One', sans-serif;
+  background-color: #fefefe;
+  color: #333;
+}
+
+/* Cabeçalho */
+header {
+  background-color: #ff6600;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Conteúdo principal */
+main {
+  padding: 20px;
+}
+
+/* Container do formulário */
+.formulario, .form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* Título do formulário */
+.formulario h2, .form-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #ff6600;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Campos de entrada */
+form input[type="text"],
+form input[type="date"],
+form input[type="file"],
+form textarea,
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.60rem;
+  box-sizing: border-box;
+}
+
+/* Textarea */
+form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Botões */
+form button[type="submit"],
+button {
+  width: 100%;
+  padding: 14px;
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+form button[type="submit"]:hover,
+button:hover {
+  background-color: #e65c00;
+  transform: scale(1.03);
+}
+
+/* Botões lado a lado */
+.botoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Rodapé */
+/* Rodapé */
+footer {
+  background-color: #ff751a; /* mesma cor do cabeçalho */
+  color: white;
+  padding: 30px 0;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .formulario, .form-container {
+    padding: 20px;
+  }
+
+  form textarea {
+    font-size: 0.5rem; /* Tamanho menor, mas ainda legível */
+  }
+
+  form button[type="submit"],
+  button {
+    font-size: 0.95rem;
+  }
+
+  header {
+    font-size: 1.5rem;
+  }
+
+  .formulario h2, .form-container h2 {
+    font-size: 1.5rem;
+  }
+
+  label {
+    font-size: 0.95rem;
+  }
+}
+@media (max-width: 900px) {
+  .formulario, .form-container {
+    padding: 25px;
+    margin: 20px;
+  }
+
+  form input[type="text"],
+  form input[type="date"],
+  form input[type="file"],
+  form textarea,
+  input,
+  select,
+  textarea {
+    font-size: 0.5rem;
+  }
+
+  .formulario h2, .form-container h2 {
+    font-size: 1.6rem;
+  }
+
+  label {
+    font-size: 0.95rem;
+  }
+}
+@media (max-width: 400px) {
+  .formulario, .form-container {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  form button[type="submit"],
+  button {
+    font-size: 0.9rem;
+    padding: 12px;
+  }
+
+  .formulario h2, .form-container h2 {
+    font-size: 1.3rem;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+}
+form > div {
+  margin-bottom: 10px;
+}
+@media (max-width: 600px) {
+  textarea::placeholder {
+    font-size: 0.8rem; /* ou 12px, se preferir */
+    color: #999;        /* opcional: tom mais suave */
+  }
+}
