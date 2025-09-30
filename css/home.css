@@ -1,6 +1,7 @@
 body,ul{
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 #cabeca {
   box-sizing: border-box;
@@ -49,18 +50,30 @@ body,ul{
   
   }
   #menu{
-    display: none;
+    display: block;
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    background-color: #ff6600;
+    z-index: 999;
+    overflow: auto;
+    left: 0;
+    height:0 ;
+    transition: .6s;
+    
+  }
+  #menu a{
+    padding: 1rem;
+    margin: 0 1rem;
+    border-bottom: 2px solid rgb(228, 214, 214);
   }
   #nav-menu.active #menu{
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 70px;
-    background-color: #ff6600;
-    overflow: auto;
-    left: 0;
-    width: 300px;
-    z-index: 999;
+    height:calc(100vh - 70px) ;
+
+    
+
     
 
   }
@@ -141,10 +154,8 @@ section.logoImg-container {
 /* Destaques */
 .highlights {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 2rem;
+   flex-direction: row;
+   gap: 1rem;
 }
 
 .highlight-box {
@@ -154,7 +165,7 @@ section.logoImg-container {
   padding: 0.5rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  width: 30%;
+  width: 25%;
   text-align: center;
 }
 .placeholder img:hover {
@@ -187,6 +198,7 @@ section.logoImg-container {
   padding: 2rem;
   background-color: #fff;
 }
+
 
 #info {
   flex: 1 1 300px;
@@ -285,15 +297,36 @@ main button:hover {
   transform: scale(1.05);
 }
 
-/* Rodapé */
+@media (max-width: 768px) {
+  .highlights {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 
 
 
 /* Responsividade */
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex;
+@media (max-width: 768px),(max-width:667px) {
+  .highlight-box{
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    width: 100%;
   }
+  
+  }
+  @media (max-width: 480px) {
+  .highlights {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .highlight-box {
+    width: 90%;
+  }
+}
 
  footer nav {
     position: absolute;
@@ -334,7 +367,7 @@ main button:hover {
   footer nav li:not(:last-child) {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   }
-}
+
 
 
 
