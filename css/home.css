@@ -48,7 +48,7 @@ header, main, section, footer {
 }
 
 
-@media (min-width: 375px) and (max-width: 932px){
+@media (min-width: 375px) and (max-width: 2400px){
   #btn-mobile{
      display: flex;
      padding: .5rem 1rem;
