@@ -48,7 +48,77 @@ header, main, section, footer {
 }
 
 
-@media(max-width:667px) {
+@media (min-width: 375px) and (max-width: 932px){
+  #btn-mobile{
+     display: flex;
+     padding: .5rem 1rem;
+     font-size: 1rem;
+     background: none; /*sem cor de fundo*/
+     border: none;
+     cursor: pointer;
+     color: white;
+      gap:.7rem ;
+  }
+  #hamburguer {
+   display: block;
+   border-top: 2px solid white;
+   width: 20px;
+  }
+   /*Quando menu estiver ativo,vai alterar o menu  */
+    #nav-menu.active #hamburguer{
+   border-top-color: transparent;/*Deixa primeiro bloco do menu oculto*/
+   
+
+   }
+    #nav-menu.active #hamburguer::after{
+          transform: rotate(135deg);
+           top:-7px;
+    }
+     #nav-menu.active #hamburguer::before{
+         transform: rotate(-135deg);
+        
+     }
+
+  /*criando um novo traço abaixo do primeiro*/
+    #hamburguer::after, #hamburguer::before { 
+      content: '';
+      width:20px ;
+      display: block;
+      height: 2px;
+      background: currentColor;
+      margin-top: 5px; /*Dando um espaçamento entre os traços*/
+      transition: .3s;
+      position: relative; /*relativo em relação a linha acima*/
+    
+   }
+  
+  #menu{
+    display: block;
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    background-color: #ff6600;
+    z-index: 999;
+    overflow: auto;
+    left: 0;
+    height:0 ;
+    transition: .6s;
+    
+  }
+  #menu a{
+    padding: 1rem;
+    margin: 0 1rem;
+    border-bottom: 2px solid rgb(228, 214, 214);
+  }
+  #nav-menu.active #menu{
+    display: flex;
+    flex-direction: column;
+    height:calc(100vh - 70px) ;
+
+ }
+}
+
+@media (max-width: 896px){
   #btn-mobile{
      display: flex;
      padding: .5rem 1rem;
