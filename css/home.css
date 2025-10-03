@@ -3,7 +3,7 @@ body,ul{
   padding: 0;
   overflow-x: hidden;
 }
-header, main, section, footer {
+header, main, section {
   margin: 0;
   padding: 0;
 }
@@ -48,7 +48,7 @@ header, main, section, footer {
 }
 
 
-@media (min-width: 375px) and (max-width: 2400px){
+@media (min-width: 375px) and (max-width: 932px){
   #btn-mobile{
      display: flex;
      padding: .5rem 1rem;
@@ -243,7 +243,8 @@ section.logoImg-container {
 }
 
 .welcome h1 {
-  font-size: 3rem;
+   font-size: clamp(2rem, 5vw, 3rem);
+
   margin-bottom: 1rem;
 }
 
@@ -275,7 +276,7 @@ section.logoImg-container {
   padding: 0.5rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  width: 35%;
+  width: 45%;
   text-align: center;
 }
 .placeholder img:hover {
@@ -290,7 +291,7 @@ section.logoImg-container {
 
 .placeholder img {
   width: 80%;
-  max-width: 250px;
+  max-width: 350px;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 8px;
@@ -439,33 +440,28 @@ main button:hover {
     width: 90%;
   }
 }
+body {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.6;
+}
 
- footer nav {
-    position: absolute;
-    top: 58px;
-    left: 0;
-    width: 100%;
-    background-color: #ff6600;
-    display: none;
-    flex-direction: column;
-  }
+.welcome h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
 
-  footer nav.active {
-    display: flex;
-  }
+.pet-card h3 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+}
 
-  footer nav ul {
-    flex-direction: column;
-    padding: 10px 0;
-  }
-
-  footer nav li {
-    padding: 10px 20px;
-  }
+.pet-card p {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
 
   .highlights {
     flex-direction: column;
     align-items: center;
+     margin-bottom: 2rem;
+
   }
 
   .about-container {
@@ -476,16 +472,9 @@ main button:hover {
   .pet-card {
     width: 100%;
   }
-  footer nav li:not(:last-child) {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  }
-
-
-
-
-
-
-
+.pet-card p {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
 
 
 .sumido {
@@ -497,11 +486,63 @@ main button:hover {
   text-align: left;
 }
 footer {
-  background-color: #ff751a; /* mesma cor do cabeçalho */
+  background-color: #ff751a;
   color: white;
-  padding: 35px 0;
+  padding: 2rem 1rem;
   font-family: 'Segoe UI', sans-serif;
   text-align: center;
 }
+
+footer h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+footer p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+footer nav {
+  display: flex;
+ 
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+footer nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+footer nav a:hover {
+  color: #ffe0cc;
+}
+
+footer div a img {
+  transition: transform 0.3s ease;
+}
+
+footer div a img:hover {
+  transform: scale(1.1);
+}
+
+@media (min-width:375px), (max-width: 600px) {
+  footer nav {
+    flex-direction: row;
+    gap: 0.3rem;
+  }
+
+  footer nav a {
+    font-size: 0.7rem;
+    font-weight: bolder;
+  }
+}
+
 
 
