@@ -1,0 +1,431 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f5f5;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+#cabeca {
+  height: 70px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 20px;
+
+  background-color: #ff751a;
+  color: white;
+}
+
+/* LOGO */
+
+#logo {
+  font-family: 'Fredoka One', cursive;
+}
+
+/* MENU */
+
+#menu {
+  display: flex;
+  gap: 15px;
+}
+
+#menu a {
+  display: block;
+
+  padding: 8px 12px;
+
+  color: white;
+  font-weight: bold;
+
+  border-radius: 6px;
+
+  transition: 0.3s;
+}
+
+#menu a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* BOTÃO MOBILE */
+
+#btn-mobile {
+  display: none;
+
+  align-items: center;
+  gap: 0.7rem;
+
+  padding: 0.5rem 1rem;
+
+  background: none;
+  border: none;
+
+  color: white;
+
+  cursor: pointer;
+}
+
+/* HAMBURGUER */
+
+#hamburguer {
+  display: block;
+
+  width: 20px;
+
+  border-top: 2px solid white;
+}
+
+#hamburguer::before,
+#hamburguer::after {
+  content: "";
+
+  display: block;
+
+  width: 20px;
+  height: 2px;
+
+  margin-top: 5px;
+
+  background: currentColor;
+
+  position: relative;
+
+  transition: 0.3s;
+}
+
+/* MENU ATIVO */
+
+#nav-menu.active #hamburguer {
+  border-top-color: transparent;
+}
+
+#nav-menu.active #hamburguer::before {
+  transform: rotate(-135deg);
+}
+
+#nav-menu.active #hamburguer::after {
+  transform: rotate(135deg);
+  top: -7px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.welcome {
+  text-align: center;
+  background-color: white;
+}
+
+.logoImg {
+  width: 100%;
+  height: 600px;
+
+  background-image: url("../assets/img/york fullHD.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.welcome h1 {
+  margin-top: 20px;
+
+  font-family: 'Fredoka One', cursive;
+  font-size: 3rem;
+}
+
+.welcome h2 {
+  margin: 15px 0;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+button,
+.btn {
+  display: inline-block;
+
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: #4CAF50;
+  color: white;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
+}
+
+button:hover,
+.btn:hover {
+  background-color: #45a049;
+  transform: scale(1.03);
+}
+
+/* =========================
+   HIGHLIGHTS
+========================= */
+
+.highlights {
+  display: flex;
+  gap: 20px;
+
+  padding: 2rem;
+}
+
+.highlight-box {
+  flex: 1;
+
+  background-color: white;
+
+  padding: 1rem;
+
+  border-radius: 12px;
+
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+  text-align: center;
+}
+
+.highlight-box h3 {
+  margin: 15px 0;
+}
+
+.placeholder img,
+.highlight-image {
+  width: 100%;
+  max-width: 250px;
+
+  aspect-ratio: 4 / 3;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  transition: 0.3s;
+}
+
+.placeholder img:hover,
+.highlight-image:hover {
+  transform: scale(1.03);
+
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* =========================
+   SOBRE
+========================= */
+
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  padding: 2rem;
+
+  background-color: white;
+}
+
+#info {
+  flex: 1 1 300px;
+}
+
+.texto1 {
+  margin-top: 1rem;
+  line-height: 1.7;
+}
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.conteudo {
+  padding: 1rem;
+}
+
+.conteudo h1 {
+  padding: 10px;
+
+  text-align: center;
+
+  background-color: #ff751a;
+  color: white;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.container-cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(300px, 1fr));
+
+  gap: 20px;
+
+  padding: 2rem;
+}
+
+.pet-card {
+  background-color: white;
+
+  padding: 1rem;
+
+  border-radius: 12px;
+
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+  overflow: hidden;
+}
+
+.pet-card img {
+  width: 100%;
+
+  border-radius: 8px;
+
+  margin-bottom: 10px;
+}
+
+.pet-card p {
+  margin: 8px 0;
+}
+
+.sumido {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  padding: 35px 20px;
+
+  background-color: #ff751a;
+  color: white;
+
+  text-align: center;
+}
+
+footer nav {
+  margin: 15px 0;
+}
+
+footer nav a {
+  margin: 0 10px;
+
+  color: white;
+}
+
+footer nav a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 768px) {
+
+  /* MENU */
+
+  #btn-mobile {
+    display: flex;
+  }
+
+  #menu {
+    position: absolute;
+
+    top: 70px;
+    left: 0;
+
+    width: 100%;
+    height: 0;
+
+    overflow: hidden;
+
+    flex-direction: column;
+
+    background-color: #ff6600;
+
+    transition: 0.6s;
+
+    z-index: 999;
+  }
+
+  #menu a {
+    padding: 1rem;
+
+    border-bottom:
+      1px solid rgba(255,255,255,0.2);
+  }
+
+  #nav-menu.active #menu {
+    height: calc(100vh - 70px);
+  }
+
+  /* HERO */
+
+  .logoImg {
+    height: 350px;
+  }
+
+  .welcome h1 {
+    font-size: 2rem;
+  }
+
+  /* HIGHLIGHTS */
+
+  .highlights {
+    flex-direction: column;
+  }
+
+  .highlight-box {
+    width: 100%;
+  }
+
+  /* ABOUT */
+
+  .about-container {
+    flex-direction: column;
+  }
+
+  /* CARDS */
+
+  .container-cards {
+    grid-template-columns: 1fr;
+  }
+
+}

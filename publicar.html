@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetFinder - Cadastro de Pet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/publicar.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+  <!-- Cabeçalho -->
+  <header id="cabeca">
+    <h1 id="logo">🐾 PetFinder</h1>
+    <nav id="nav-menu">
+      <button id="btn-mobile">Menu <span id="hamburguer"></span></button>
+      <ul id="menu">
+        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="animais_encontra.html">Encontrados</a></li>
+        <li><a href="adocao.html">Adoção</a></li>
+        <li><a href="dicas.html">Dicas</a></li>
+        <li><a href="cadastrados.html">Pets Cadastrados</a></li>
+        <li><a href="contato.html">Contato</a></li>
+        <li><a href="login_ong.html">Área da ONG</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <div class="cadastro-container">
+    <h2>Cadastro de Pet</h2>
+
+    <form id="form-container">
+      <div>
+        <label for="nome">Nome do pet:</label>
+        <input type="text" id="nome" name="nome" required>
+      </div>
+
+      <div>
+        <label for="localizacao">Última localização vista:</label>
+        <input type="text" id="localizacao" name="localizacao" placeholder="Clique no mapa..." required readonly>
+        <div id="map" style="height: 300px; border-radius: 8px; margin-top: 10px; border: 1px solid #ccc;"></div>
+        <input type="hidden" id="lat" name="latitude">
+        <input type="hidden" id="lng" name="longitude">
+      </div>
+
+      <div>
+        <label for="tipo">Tipo de Animal:</label>
+        <select id="tipo" name="tipo" required>
+          <option value="cachorro">Cachorro</option>
+          <option value="gato">Gato</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="sexo">Sexo:</label>
+        <select id="sexo" name="sexo" required>
+          <option value="macho">Macho</option>
+          <option value="fêmea">Fêmea</option>
+          <option value="indefinido">Indefinido</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="idade">Idade estimada:</label>
+        <input type="text" id="idade" name="idade" required>
+      </div>
+
+      <div>
+        <label for="data">Data do desaparecimento:</label>
+        <input type="date" id="data" name="data" required>
+      </div>
+
+      <div>
+        <label for="contato">Contato (email):</label>
+        <input type="email" id="contato" name="contato" required>
+      </div>
+
+      <div>
+        <label for="whatsapp">WhatsApp:</label>
+        <input type="text" id="whatsapp" name="whatsapp">
+      </div>
+
+      <div>
+        <label for="imagem">Imagem do pet:</label>
+        <input type="file" id="imagem" name="imagem" accept="image/*" required>
+      </div>
+
+      <div>
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao"></textarea>
+      </div>
+
+      <button type="submit">Cadastrar</button>
+    </form>
+  </div>
+
+  <footer>
+    <div style="max-width: 1000px; margin: auto;">
+      <h3>🐶 PetFinder</h3>
+      <p>Conectando pets incríveis a lares amorosos 💕</p>
+      <p style="font-size: 14px;">© 2025 PetFinder. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+<script>
+  // Menu responsivo
+  const btnMobile = document.querySelector('#btn-mobile');
+  btnMobile.addEventListener('click', () => {
+    document.querySelector('#nav-menu').classList.toggle('active');
+  });
+
+  // Mapa interativo
+  const map = L.map('map').setView([-14.235, -51.9253], 4);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  let marker;
+  map.on('click', function(e) {
+    const lat = e.latlng.lat;
+    const lng = e.latlng.lng;
+
+    if (marker) {
+      marker.setLatLng(e.latlng);
+    } else {
+      marker = L.marker(e.latlng).addTo(map);
+    }
+
+    document.getElementById('lat').value = lat;
+    document.getElementById('lng').value = lng;
+
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('localizacao').value = data.display_name || `Lat: ${lat}, Lng: ${lng}`;
+      });
+  });
+
+  // Cadastro e salvamento
+  const form = document.getElementById('form-container');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const pet = {
+      id: 'pet-' + Date.now(),
+      nome: document.getElementById('nome').value.trim(),
+      localizacao: document.getElementById('localizacao').value.trim(),
+      tipo: document.getElementById('tipo').value,
+      sexo: document.getElementById('sexo').value,
+      idade: document.getElementById('idade').value.trim(),
+      data: document.getElementById('data').value,
+      contato: document.getElementById('contato').value.trim(),
+      whatsapp: document.getElementById('whatsapp').value.trim(),
+      descricao: document.getElementById('descricao').value.trim(),
+      lat: parseFloat(document.getElementById('lat').value),
+      lng: parseFloat(document.getElementById('lng').value),
+      status: "desaparecido"
+    };
+
+    const imagemInput = document.getElementById('imagem').files[0];
+    if (imagemInput) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        pet.imagem = e.target.result;
+        salvarPet(pet);
+      };
+      reader.readAsDataURL(imagemInput);
+    } else {
+      pet.imagem = '';
+      salvarPet(pet);
+    }
+  });
+
+  function salvarPet(pet) {
+    const ocorrenciasPets = JSON.parse(localStorage.getItem('ocorrenciasPets')) || [];
+    ocorrenciasPets.push(pet);
+    localStorage.setItem('ocorrenciasPets', JSON.stringify(ocorrenciasPets));
+
+    alert(`Pet cadastrado com sucesso! Código: ${pet.id}`);
+    window.location.href = "cadastrados.html";
+  }
+</script>
+</body>
+</html>

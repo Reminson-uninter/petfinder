@@ -1,0 +1,880 @@
+/* =========================
+   RESET
+========================= */
+ html{
+         scroll-behavior: smooth;
+    }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #faf5f1;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+#cabeca {
+  height: 70px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 20px;
+
+  background-color: #ff751a;
+  color: white;
+}
+
+/* LOGO */
+
+#logo {
+  font-family: 'Fredoka One', cursive;
+}
+
+/* MENU */
+
+#menu {
+  display: flex;
+  gap: 15px;
+}
+
+#menu a {
+  display: block;
+
+  padding: 8px 12px;
+
+  color: white;
+  font-weight: bold;
+
+  border-radius: 6px;
+
+  transition: 0.3s;
+}
+
+#menu a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* BOTÃO MOBILE */
+
+#btn-mobile {
+  display: none;
+
+  align-items: center;
+  gap: 0.7rem;
+
+  padding: 0.5rem 1rem;
+
+  background: none;
+  border: none;
+
+  color: white;
+
+  cursor: pointer;
+}
+
+/* HAMBURGUER */
+
+#hamburguer {
+  display: block;
+
+  width: 20px;
+
+  border-top: 2px solid white;
+}
+
+#hamburguer::before,
+#hamburguer::after {
+  content: "";
+
+  display: block;
+
+  width: 20px;
+  height: 2px;
+
+  margin-top: 5px;
+
+  background: currentColor;
+
+  position: relative;
+
+  transition: 0.3s;
+}
+
+/* MENU ATIVO */
+
+#nav-menu.active #hamburguer {
+  border-top-color: transparent;
+}
+
+#nav-menu.active #hamburguer::before {
+  transform: rotate(-135deg);
+}
+
+#nav-menu.active #hamburguer::after {
+  transform: rotate(135deg);
+  top: -7px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.welcome {
+  text-align: center;
+  background-color: white;
+}
+
+.logoImg {
+  width: 100%;
+  height: 600px;
+
+  background-image: url("assets/img/york\ fullHD.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.welcome h1 {
+  margin-top: 0; /* Corrigido para eliminar espaço em branco */
+  font-family: 'Fredoka One', cursive;
+  font-size: 3rem;
+}
+
+.welcome h2 {
+  margin: 15px 0;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+button,
+.btn {
+  display: inline-block;
+
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: #4CAF50;
+  color: white;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
+}
+
+button:hover,
+.btn:hover {
+  background-color: #45a049;
+  transform: scale(1.03);
+}
+
+button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn a {
+  color: white;
+}
+
+/* =========================
+   HIGHLIGHTS
+========================= */
+
+.highlights {
+  display: flex;
+  gap: 20px;
+
+  padding: 2rem;
+}
+
+.highlight-box {
+  flex: 1;
+
+  background-color: white;
+
+  padding: 1rem;
+
+  border-radius: 12px;
+
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+  text-align: center;
+}
+
+.highlight-box h3 {
+  margin: 15px 0;
+}
+
+.placeholder img,
+.highlight-image {
+  width: 100%;
+  max-width: 350px;
+
+  aspect-ratio: 4 / 3;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  transition: 0.3s;
+}
+
+.placeholder img:hover,
+.highlight-image:hover {
+  transform: scale(1.03);
+
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* =========================
+   SOBRE
+========================= */
+
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 97%;
+  margin: 0 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  
+
+  padding: 2rem;
+
+  background-color: white;
+}
+
+#info {
+  flex: 1 1 300px;
+  width: 90%;
+  padding: 1rem;
+  
+}
+
+.texto1 {
+  margin-top: 1rem;
+  line-height: 1.7;
+}
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+section {
+  padding: 20px;
+}
+
+h2 {
+  color: #4CAF50;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.conteudo {
+  padding: 1rem;
+}
+
+.conteudo h1 {
+  padding: 10px;
+
+  text-align: center;
+
+  background-color: #ff751a;
+  color: white;
+}
+
+/* =========================
+   CARD PADRÃO
+========================= */
+
+.card {
+  background: white;
+
+  padding: 15px;
+  margin: 10px 0;
+
+  border-radius: 8px;
+
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* =========================
+   CARDS DE PETS
+========================= */
+
+.container-cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(300px, 1fr));
+
+  gap: 20px;
+
+  padding: 2rem;
+}
+
+.pet-card {
+  background-color: white;
+
+  padding: 1rem;
+
+  border-radius: 12px;
+
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+  overflow: hidden;
+}
+
+.pet-card img {
+  width: 10%;
+
+  border-radius: 8px;
+
+  margin-bottom: 10px;
+}
+
+.pet-card p {
+  margin: 8px 0;
+}
+
+.sumido {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* =========================
+   ADOÇÕES
+========================= */
+
+.adocoes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  justify-content: center;
+}
+
+.gallery {
+  display: flex;
+  justify-content: center;
+}
+
+.animal-card {
+  display: flex;
+  flex-direction: column;
+
+  width: 300px;
+
+  padding: 10px;
+
+  background-color: white;
+
+  border: 2px solid #29cf19;
+  border-radius: 12px;
+
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+  overflow: hidden;
+
+  transition: transform 0.3s ease;
+}
+
+.animal-card:hover {
+  transform: scale(1.03);
+}
+
+.animal-card img {
+  width: 100%;
+  height: 200px;
+
+  object-fit: cover;
+
+  border-radius: 8px;
+}
+
+#foto-pet {
+  width: 150px;
+  height: 150px;
+
+  margin: 5px auto;
+
+  border-radius: 10%;
+  border: 1px solid #29cf19;
+
+  object-fit: cover;
+}
+
+.descricao {
+  margin-top: 10px;
+
+  text-align: left;
+
+  font-weight: bold;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  background-color: #ff751a;
+  color: white;
+
+  padding: 40px 20px;
+
+  text-align: center;
+
+  margin-top: 50px;
+}
+
+/* CONTAINER */
+
+.footer-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* TÍTULO */
+
+.footer-content h3 {
+  font-size: 2rem;
+
+  margin-bottom: 10px;
+
+  font-family: 'Fredoka One', cursive;
+}
+
+/* TEXTO */
+
+.footer-content p {
+  margin: 10px 0;
+
+  line-height: 1.6;
+}
+
+/* REDES SOCIAIS */
+
+.social-links {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 20px;
+
+  margin: 25px 0;
+}
+
+.social-links a {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 50px;
+  height: 50px;
+
+  background-color: rgba(255, 255, 255, 0.15);
+
+  border-radius: 50%;
+
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.social-links a:hover {
+  transform: translateY(-5px);
+
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ÍCONES */
+
+.social-links img {
+  width: 28px;
+  height: 28px;
+}
+
+/* NAV FOOTER */
+
+.footer-nav {
+  display: flex;
+
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 20px;
+
+  margin: 25px 0;
+}
+
+.footer-nav a {
+  color: white;
+
+  font-weight: bold;
+
+  transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+  color: #ffe0cc;
+}
+
+/* COPYRIGHT */
+
+.copyright {
+  margin-top: 20px;
+
+  font-size: 0.9rem;
+
+  opacity: 0.8;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 1024px) {
+
+  .card {
+    padding: 12px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  /* MENU */
+
+  #btn-mobile {
+    display: flex;
+  }
+
+  #menu {
+    position: absolute;
+
+    top: 70px;
+    left: 0;
+
+    width: 100%;
+    height: 0;
+
+    overflow: hidden;
+
+    flex-direction: column;
+
+    background-color: #ff6600;
+
+    transition: 0.6s;
+
+    z-index: 999;
+  }
+
+  #menu a {
+    padding: 1rem;
+
+    border-bottom:
+      1px solid rgba(255,255,255,0.2);
+  }
+
+  #nav-menu.active #menu {
+    height: calc(100vh - 70px);
+  }
+
+  nav li:not(:last-child) {
+    border-bottom:
+      1px solid rgba(255,255,255,0.3);
+  }
+
+  /* HERO */
+
+  .logoImg {
+    height: 350px;
+  }
+
+  .welcome h1 {
+    font-size: 2rem;
+  }
+
+  /* HIGHLIGHTS */
+
+  .highlights {
+    flex-direction: column;
+  }
+
+  .highlight-box {
+    width: 100%;
+  }
+
+  /* ABOUT */
+
+  .about-container {
+    flex-direction: column;
+  }
+
+  /* PETS */
+
+  .container-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .animal-card {
+    width: 100%;
+  }
+
+  /* FOOTER */
+
+  footer {
+    padding: 30px 15px;
+  }
+
+  .footer-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .footer-nav {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .social-links {
+    gap: 15px;
+  }
+
+  .social-links a {
+    width: 45px;
+    height: 45px;
+  }
+
+  .social-links img {
+    width: 24px;
+    height: 24px;
+  }
+
+}
+
+@media screen and (max-height: 500px) and (min-width: 600px) {
+
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    justify-content: space-between;
+  }
+
+  .card {
+    flex: 1 1 45%;
+    min-width: 280px;
+  }
+
+  h2 {
+    width: 100%;
+  }
+
+}
+/*adoção*/
+/* Regras */
+.rules {
+  margin-top: 60px;
+  background-color: #ffe1cc;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rules h2 {
+  text-align: center;
+  color: #d35400;
+  margin-bottom: 20px;
+}
+
+.rules ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  font-size: 1.1em;
+}
+
+.rules li {
+  margin-bottom: 10px;
+}
+
+/* CONTATO */
+
+
+
+.contact-section h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-form button {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.partners-section {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.partners-section ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+
+@media (min-width:375px), (max-width: 600px) {
+  .parceiros{
+justify-content: center;
+
+  
+}
+.pelegrinos-vet{
+  width: 80px;
+  height: 80px;
+}
+.anjosDajuda{
+  width: 80px;
+  height: 80px;
+}
+  footer nav {
+    flex-direction: row;
+    gap: 0.3rem;
+  }
+
+  footer nav a {
+    font-size: 0.7rem;
+    font-weight: bolder;
+  }
+}
+
+
+.parceiros {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-items:center;
+  gap: 10px;
+ 
+}
+
+.pelegrinos-vet{
+  cursor: pointer;
+}
+.pelegrinos-vet:hover{
+   transform: scale(1.05);
+}
+
+.anjosDajuda{
+   cursor: pointer;
+   
+
+}
+.anjosDajuda:hover{
+ transform: scale(1.05);
+}
+
+/*dicas/cuidados*/
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 2rem; 
+}   
+ .card img {
+  width: 100%;
+  height: 300px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+  margin-bottom: 15px;
+}
+.card #combo {
+  width: 100%;
+  height: 80%;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+  margin-bottom: 15px;
+}
+
+.btn-emergencia {
+  display: inline-block;
+  padding: 12px 20px;
+  background-color: #e74c3c; 
+  font-weight: bold;
+  border-radius: 8px;
+  text-align: center;
+ 
+} 
+.cuidados  {
+  background-color: #f7f6f6;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+article,.card ul li {
+  list-style-type: circle;
+  margin-left: 20px;
+}

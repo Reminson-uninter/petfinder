@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>PetConecta | Página Inicial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="home.css" />
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+ 
+  <style>
+    .linha {
+      width: 100%;
+      height: 4px;
+      background-color: #ff751a;
+      margin: 10px 0;
+      border-radius: 2px;
+    }
+    .about-container h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #333;
+    }
+    .about-container p {
+      font-family: 'Merriweather', serif;
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+    #menu a.active {
+      color: #ff751a;
+      font-weight: bold;
+      border-bottom: 2px solid #ff751a;
+    }
+    #emergencia-container {
+      border: 2px dotted #ff751a;
+      padding: 20px;
+      border-radius: 12px;
+      background-color: white;
+      margin-top: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+
+    /* Estilos extras para o botão de Geolocalização */
+    .btn-geo {
+      background-color: #ff751a;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .btn-geo:hover {
+      background-color: #e06414;
+    }
+    #statusLocalizacao {
+      display: block;
+      margin-top: 5px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: #555;
+    }
+
+    /* Estilização do contêiner do Mapa */
+    #mapa-pets {
+      width: 100%;
+      height: 450px;
+      border-radius: 12px;
+      margin: 20px auto;
+      border: 2px solid #ff751a;
+      z-index: 1; /* Evita que o mapa cubra menus fixos */
+    }
+    .legenda-mapa {
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header id="cabeca">
+    <h1 id="logo">🐾 PetConecta</h1>
+    <nav id="nav-menu">
+      <button
+        id="btn-mobile"
+        aria-label="Abrir Menu"
+        aria-expanded="false"
+        aria-controls="menu"
+      >
+        Menu
+        <span id="hamburguer"></span>
+      </button>
+
+      <ul id="menu">
+        <li><a href="#home">Página Inicial</a></li>
+        <li><a href="animais_encontra.html">Encontrados</a></li>
+        <li><a href="#adocoes">Adoção</a></li>
+        <li><a href="#dicas">Cuidados</a></li>
+        <li><a href="cadastrados.html">Pets Cadastrados</a></li>
+        <li><a href="#contatos">Contato</a></li>
+        <li><a href="login_ong.html">Área da ONG</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="welcome" id="home">
+      <div class="logoImg">
+        <div class="interno"></div>
+      </div>
+      <h1>Bem-vindo ao PetConecta!</h1>
+      <h2>Cadastre seu pet desaparecido aqui!</h2>
+      <button id="action-btn" class="btn">Cadastrar</button>
+    </section>
+
+    <section class="highlights">
+      <article class="highlight-box">
+        <h2>Campanhas Ativas</h2>
+        <a href="#campanhas">
+          <img src="assets/img/campanha.png" alt="Campanha Alimente o Amor" class="highlight-image" />
+        </a>
+        <h3>🐾 Campanha: Alimente o Amor</h3>
+        <p>
+          Milhares de focinhos esperam por um gesto seu.
+          Doe ração. Doe esperança. Juntos, podemos encher potes e corações.
+        </p>
+      </article>
+
+      <article class="highlight-box">
+        <h2>Adoções Recentes</h2>
+        <img src="assets/img/adoção.jpg" alt="Adoções recentes" class="highlight-image" />
+        <h3>🐾 Do Asfalto ao Abraço</h3>
+        <p>
+          Ele vivia nas ruas. Agora vive no coração.
+          Adoções transformam vidas — humanas e caninas.
+        </p>
+      </article>
+
+      <article class="highlight-box">
+        <h2>Dicas</h2>
+        <img src="assets/img/gato-perdido.jpg" alt="Dicas para encontrar pets" class="highlight-image" />
+        <h3>🐾 Como encontrar seu pet</h3>
+        <p>
+          Espalhe cartazes com foto, nome e telefone.
+          Use redes sociais e grupos locais de proteção animal.
+        </p>
+      </article>
+    </section>
+
+    <section class="about-container">
+      <div id="info">
+        <h1>Sobre Nós</h1>
+        <div class="linha"></div>
+        <p class="texto1">
+          Somos apaixonados por animais e movidos pelo desejo de reunir famílias. Nossa plataforma nasceu com um propósito
+          claro: ajudar na localização de pets perdidos, oferecendo esperança e apoio a quem enfrenta o sofrimento de uma separação inesperada.
+          Aqui, cada latido, miado ou olhar faz diferença. Acreditamos que nenhum animal deve ficar longe de seu lar por falta de informação ou
+          ajuda. Por isso, criamos um espaço onde tutores podem divulgar rapidamente o desaparecimento de seus companheiros, e onde a comunidade pode colaborar ativamente com avistamentos
+          e resgates. Além disso, dedicamos uma área especial à adoção responsável. Sabemos que muitos animais esperam por uma nova chance, por 
+          um lar cheio de carinho e cuidado. Se você está pronto para abrir seu coração, nossa seção de adoção conecta você a pets que precisam de 
+          uma nova história. Juntos, podemos transformar perdas in reencontros e solidão em novos começos. Seja bem-vindo à nossa rede de cuidado, empatia e amor pelos animais.
+        </p>
+      </div>
+    </section>
+
+    <section class="campanha-container" id="campanhas">
+      <h2>🎉 Campanha em Destaque</h2>
+      <div class="card">
+        <p style="font-size: 1.1rem; margin-bottom: 20px;">
+          <span style="font-weight: bold;">Cada compra gera uma doação para cães e gatos resgatados.</span>
+        </p>
+        <p><strong>Meta:</strong> 5 toneladas de ração</p>
+        <p><strong>Progresso:</strong> 3.2 toneladas</p>
+        <button class="btn" disabled>Quero Ajudar</button>
+      </div>
+    </section>
+
+    <section id="adocoes">
+      <h2>🐶🐱 Adoções Recentes</h2>
+      
+      <div class="filtros">
+        <h4>🔍 Filtrar pets</h4>
+        <select id="filtroTipo">
+          <option value="">Tipo</option>
+          <option value="Cão">Cão</option>
+          <option value="Gato">Gato</option>
+        </select>
+        <select id="filtroSexo">
+          <option value="">Sexo</option>
+          <option value="Macho">Macho</option>
+          <option value="Fêmea">Fêmea</option>
+        </select>
+        <select id="filtroPorte">
+          <option value="">Porte</option>
+          <option value="Pequeno">Pequeno</option>
+          <option value="Médio">Médio</option>
+          <option value="Grande">Grande</option>
+        </select>
+        
+        <button type="button" id="btnLocalizacao" class="btn-geo">📍 Pets Próximos</button>
+        
+        <button id="btnFiltrar">Filtrar</button>
+        <button id="btnLimpar">Limpar</button>
+
+        <span id="statusLocalizacao"></span>
+      </div>
+
+      <section class="rules">
+        <h2>Regras e Orientações para Adoção</h2>
+        <ul>
+          <li>Ser maior de 18 anos</li>
+          <li>Apresentar documento com foto</li>
+          <li>Concordar com visita de acompanhamento</li>
+          <li>Garantir ambiente seguro e amoroso</li>
+        </ul>
+      </section>
+
+      <div class="adocoes-container">
+        </div>
+    </section>
+    
+    <section id="dicas">
+      <h2>🔍 Dicas para Encontrar seu Pet</h2>
+      <div class="card">
+        <ol>
+          <li>
+            Espalhe cartazes na vizinhança
+            <a href="https://br.freepik.com/vetores/cartaz-animal-perdido" target="_blank" class="btn">Baixar Modelo</a>
+          </li>
+          <li>Use redes sociais para ampliar o alcance</li>
+          <li>Cadastre seu pet perdido no PetFinder</li>
+        </ol>
+      </div>
+    </section>
+
+    <div class="cuidados">
+      <section class="grid" aria-label="Categorias de Dicas">
+        <article class="card">
+          <img src="assets/img/saude-pet.png" alt="Veterinária cuidando de cachorro" />
+          <h2>🩺 Saúde</h2>
+          <ul>
+            <li>Vacinação em dia.</li>
+            <li>Consultas veterinárias anuais.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <img src="assets/img/alimentacao.png" alt="Alimentando felino" />
+          <h2>🍽️ Alimentação</h2>
+          <ul>
+            <li>Ração de qualidade conforme idade e porte.</li>
+            <li>Evite alimentos humanos tóxicos como chocolate e cebola.</li>
+            <li>Água fresca sempre disponível.</li>
+            <li>Petiscos com moderação como recompensa.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <img src="assets/img/viagem.png" alt="Família ao lado do carro colocando pet na caixa de transporte" />
+          <h2>✈️ Viagens com Pets</h2>
+          <ul>
+            <li>Use caixas de transporte ou cintos específicos.</li>
+            <li>Leve carteira de vacinação e atestado de saúde.</li>
+            <li>Leve brinquedos e objetos familiares para adaptação.</li>
+            <li>Nunca deixe o pet sozinho no carro.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <img src="assets/img/exercicio-pet.png" alt="Mulher fazendo exercícios ao ar livre com cachorros" />
+          <h2>🧘‍♂️ Bem-estar e Comportamento</h2>
+          <ul>
+            <li>Exercícios diários e estímulos mentais.</li>
+            <li>Socialização com outros animais e pessoas.</li>
+            <li>Ambiente seguro e confortável com cama e brinquedos.</li>
+            <li>Use reforço positivo para ensinar comandos.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>🩹 Cuidados Especiais</h2>
+          <img id="combo" src="assets/img/cuidados-especiais.png" alt="Veterinária examinando um gato idoso" />
+        </article>
+      </section>
+
+      <div id="emergencia-container">
+        <section class="emergencia">
+          <h2>🚨 Emergências</h2>
+          <div class="emergency-box">
+            <p style="font-size: 1.1rem; margin-bottom: 20px;">
+              Se seu pet ingeriu algo tóxico, procure um veterinário imediatamente.
+            </p>
+            <button class="btn-emergencia">
+              <a href="https://www.google.com/search?q=emergencia+veterinaria+perto+de+mim" target="_blank" style="color: white; text-decoration: none;">Ver Veterinários 24h</a>
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+    
+    <section>
+      <h2>💬 Frases que Inspiram</h2>
+      <div class="card">
+        <p>“Cada clique pode mudar uma vida.”</p>
+        <p>“Adotar é multiplicar amor.”</p>
+        <p>“Seu lar pode ser o recomeço de alguém.”</p>
+      </div>
+    </section>
+
+    <section class="mapa-section">
+      <h1 style="text-align: center;">🗺️ Mapa de Ocorrências</h1>
+      <p class="legenda-mapa">
+        <span style="color: #ff3333; font-weight: bold;">🔴 Desaparecidos</span> &nbsp;&nbsp;|&nbsp;&nbsp; 
+        <span style="color: #2beb31; font-weight: bold;">🟢 Encontrados</span>
+      </p>
+      <div id="mapa-pets"></div>
+    </section>
+
+    <section class="desaparecidos">
+      <h1>Desaparecidos</h1>
+      <div class="container-cards">
+        </div>
+    </section>
+
+    <section class="contatos-lista-section">
+      <h2>📞 Mensagens Recebidas</h2>
+      <table id="contatos-list">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Mensagem</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-contatos">
+          </tbody>
+      </table>
+    </section>
+
+    <section class="contact-section" id="contatos">
+      <h1>Fale Conosco</h1>
+      <form id="contact-form" class="contact-form">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required />
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="mensagem">Mensagem:</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+
+        <button type="submit">Enviar</button>
+        <p id="mensagemStatus"></p>
+      </form>
+    </section>
+      
+    <section class="partners-section">
+      <h2>🤝 Parcerias</h2>
+      <div class="parceiros">
+        <div id="pelegrinos"></div>
+      </div>
+      <p>Se você representa uma ONG, clínica veterinária, pet shop ou deseja apoiar nossa causa, entre em contato!</p>
+      <ul>
+        <li>Email: <a href="mailto:parcerias@petfinder.com.br">parcerias@petfinder.com.br</a></li>
+        <li>Telefone: <a href="tel:+5571999999999">(71) 99999-9999</a></li>
+        <li>Instagram: <a href="https://instagram.com/PetConecta" target="_blank">@petConecta</a></li>
+      </ul>
+    </section>
+
+  </main>
+       
+  <footer>
+    <div class="footer-content">
+      <h3>🐶 PetConecta</h3>
+      <p>Conectando pets incríveis a lares amorosos 💕</p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/seuusuario" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" />
+        </a>
+        <a href="https://www.facebook.com/seuusuario" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" />
+        </a>
+      </div>
+      <nav class="footer-nav">
+        <a href="#home">Página Inicial</a>
+        <a href="#adocoes">Adoção</a>
+        <a href="#dicas">Cuidados</a>
+        <a href="#contatos">Contato</a>
+      </nav>
+      <p class="copyright">© 2026 PetConecta. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/anima.js" defer></script>
+  <script src="js/parceiros.js"></script>
+  <script src="js/exibir_pets.js"></script>
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/contatoAPI.js"></script>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const btnLocalizacao = document.getElementById("btnLocalizacao");
+    const statusLocalizacao = document.getElementById("statusLocalizacao");
+    
+    if (btnLocalizacao) {
+      btnLocalizacao.addEventListener("click", () => {
+        if (!navigator.geolocation) {
+          statusLocalizacao.textContent = "Geolocalização não suportada no seu navegador.";
+          statusLocalizacao.style.color = "red";
+          return;
+        }
+
+        statusLocalizacao.textContent = "Buscando localização... Permita o acesso no navegador.";
+        statusLocalizacao.style.color = "#ff751a";
+
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+
+            statusLocalizacao.textContent = "Coordenadas obtidas! Identificando cidade...";
+
+            if (typeof mapa !== 'undefined') {
+              mapa.setView([lat, lng], 13);
+            }
+
+            try {
+              const response = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&addressdetails=1`,
+                { headers: { 'Accept-Language': 'pt-BR' } }
+              );
+
+              if (!response.ok) throw new Error();
+
+              const data = await response.json();
+              const cidadeUsuario = data.address.city || data.address.town || data.address.village || "";
+
+              if (cidadeUsuario) {
+                statusLocalizacao.textContent = `📍 Pets filtrados em: ${cidadeUsuario}`;
+                statusLocalizacao.style.color = "green";
+                
+                filtrarPorCidadeDoUsuario(cidadeUsuario);
+              } else {
+                statusLocalizacao.textContent = "Não encontramos uma cidade definida para esta localização.";
+                statusLocalizacao.style.color = "orange";
+              }
+
+            } catch (error) {
+              statusLocalizacao.textContent = "Erro ao conectar com o serviço de mapas.";
+              statusLocalizacao.style.color = "red";
+            }
+          },
+          (error) => {
+            statusLocalizacao.style.color = "red";
+            if (error.code === error.PERMISSION_DENIED) {
+              statusLocalizacao.textContent = "Acesso à localização recusado pelo usuário.";
+            } else {
+              statusLocalizacao.textContent = "Não foi possível obter sua localização atual.";
+            }
+          }
+        );
+      });
+    }
+
+    function filtrarPorCidadeDoUsuario(cidade) {
+      console.log(`Buscando no banco de dados do PetConecta animais cadastrados na cidade: ${cidade}`);
+    }
+
+    // --- CONFIGURAÇÃO E INICIALIZAÇÃO DO MAPA ---
+
+    // Inicializa o mapa focado em Coroa Vermelha
+    const mapa = L.map('mapa-pets').setView([-16.3299, -39.0202], 14);
+
+    // Renderiza a camada de visualização de ruas do OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(mapa);
+
+    // Definição dos pins customizados redondos
+    const iconeDesaparecido = L.divIcon({
+      className: 'custom-pin-desaparecido',
+      html: `<div style="background-color: #ff3333; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.4);"></div>`,
+      iconSize: [14, 14],
+      iconAnchor: [7, 7]
+    });
+
+    const iconeEncontrado = L.divIcon({
+      className: 'custom-pin-encontrado',
+      html: `<div style="background-color: #2beb31; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.4);"></div>`,
+      iconSize: [14, 14],
+      iconAnchor: [7, 7]
+    });
+
+    // Puxa a lista do LocalStorage ou inicia vazia
+    const ocorrenciasPets = JSON.parse(localStorage.getItem('ocorrenciasPets')) || [];
+
+    // FUNÇÃO CORRIGIDA: Agora ela usa o parâmetro correto "listaPets"
+    function renderizarPinsNoMapa(listaPets) {
+      if (!listaPets || listaPets.length === 0) return;
+
+      listaPets.forEach(pet => {
+        // Garante que o pet possui coordenadas válidas antes de plotar
+        const latitude = pet.lat || pet.latitude;
+        const longitude = pet.lng || pet.longitude;
+
+        if (!latitude || !longitude) return;
+
+        const iconeMarcador = pet.status === 'desaparecido' ? iconeDesaparecido : iconeEncontrado;
+        const corTextoPopup = pet.status === 'desaparecido' ? '#ff3333' : '#2beb31';
+        const tagStatus = pet.status === 'desaparecido' ? '🚨 Desaparecido' : '✅ Encontrado';
+
+        L.marker([latitude, longitude], { icon: iconeMarcador })
+          .addTo(mapa)
+          .bindPopup(`
+            <strong style="color: ${corTextoPopup}; font-size: 1rem;">${tagStatus}</strong><br>
+            <div>  <img  style='width:50%;' src="${pet.imagem}" alt="${pet.nome}" onerror="this.src='https://via.placeholder.com/150'"></div>
+            <strong>Nome:</strong> ${pet.nome || 'Sem nome'}<br>
+            <strong>Info:</strong> ${pet.descricao || 'Sem informações adicionais.'}
+          `);
+      });
+    }
+
+    // Executa a plotagem inicial dos pins salvos
+    renderizarPinsNoMapa(ocorrenciasPets);
+  });
+</script>
+
+</body>
+</html>
