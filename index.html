@@ -363,7 +363,7 @@
         <button id="btnFiltrar">Filtrar</button>
         <button id="btnLimpar">Limpar</button>
 
-        <span id="statusLocalizacao"></span>
+        <span id="statusLocalizacaopet"></span>
       </div>
       <div class="container-cards">
         </div>
@@ -445,18 +445,25 @@
   btnMobile.addEventListener('click',toggleMenu);
   document.addEventListener("DOMContentLoaded", () => {
     const btnLocalizacao = document.getElementById("btnLocalizacao");
+  
+    
     const statusLocalizacao = document.getElementById("statusLocalizacao");
+    const statusLocalizacaopet = document.getElementById("btnLocalizacaopet");
     
     if (btnLocalizacao) {
       btnLocalizacao.addEventListener("click", () => {
         if (!navigator.geolocation) {
           statusLocalizacao.textContent = "Geolocalização não suportada no seu navegador.";
+          statusLocalizacaopet.textContent = "Geolocalização não suportada no seu navegador.";
           statusLocalizacao.style.color = "red";
+          statusLocalizacaopet.style.color = "red";
           return;
         }
 
         statusLocalizacao.textContent = "Buscando localização... Permita o acesso no navegador.";
+        statusLocalizacaopet.textContent = "Buscando localização... Permita o acesso no navegador.";
         statusLocalizacao.style.color = "#ff751a";
+         statusLocalizacaopet.style.color = "#ff751a";
 
         navigator.geolocation.getCurrentPosition(
           async (position) => {
@@ -464,6 +471,7 @@
             const lng = position.coords.longitude;
 
             statusLocalizacao.textContent = "Coordenadas obtidas! Identificando cidade...";
+            statusLocalizacaopet.textContent = "Coordenadas obtidas! Identificando cidade...";
 
             if (typeof mapa !== 'undefined') {
               mapa.setView([lat, lng], 13);
@@ -482,7 +490,9 @@
 
               if (cidadeUsuario) {
                 statusLocalizacao.textContent = `📍 Pets filtrados em: ${cidadeUsuario}`;
+                statusLocalizacaopet.textContent = `📍 Pets filtrados em: ${cidadeUsuario}`;
                 statusLocalizacao.style.color = "green";
+                statusLocalizacaopet.style.color='green'
                 
                 filtrarPorCidadeDoUsuario(cidadeUsuario);
               } else {
