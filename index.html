@@ -431,9 +431,18 @@
   <script type="module" src="js/main.js"></script>
   <script type="module" src="js/contatoAPI.js"></script>
 
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 <script>
+ //mobile navbar
+      const btnMobile =document.querySelector('#btn-mobile');
+  function toggleMenu(){
+      const nav =document.querySelector('#nav-menu');/*pega navegação*/
+      nav.classList.toggle('active');/*toggle ,significa adicione caso não tenha ou remover ,caso tenha */
+
+  }
+  btnMobile.addEventListener('click',toggleMenu);
   document.addEventListener("DOMContentLoaded", () => {
     const btnLocalizacao = document.getElementById("btnLocalizacao");
     const statusLocalizacao = document.getElementById("statusLocalizacao");
