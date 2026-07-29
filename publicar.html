@@ -14,6 +14,7 @@
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     />
+   
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link rel="stylesheet" href="css/buttons-global.css" />
   </head>
@@ -23,7 +24,6 @@
       <h1 id="logo">🐾 PetConecta</h1>
       <nav id="nav-menu">
         <button id="btn-mobile">Menu <span id="hamburguer"></span></button>
-        <!-- Este menu será renderizado dinamicamente pelo Firebase Auth -->
         <ul id="menu">
           <li><a href="index.html">Página Inicial</a></li>
           <li><a href="animais_encontra.html">Encontrados</a></li>
@@ -53,15 +53,7 @@
             placeholder="Digite o endereço ou clique no mapa..."
             required
           />
-          <div
-            id="map"
-            style="
-              height: 300px;
-              border-radius: 8px;
-              margin-top: 10px;
-              border: 1px solid #ccc;
-            "
-          ></div>
+          <div id="map" style="height: 300px; border-radius: 8px; margin-top: 10px; border: 1px solid #ccc;"></div>
           <input type="hidden" id="lat" name="latitude" />
           <input type="hidden" id="lng" name="longitude" />
         </div>
@@ -121,6 +113,8 @@
             accept="image/*"
             required
           />
+          <!-- 🚀 ADICIONADO: Container de erro visual para a imagem -->
+          <div id="erro-imagem" style="color: #ff3333; font-size: 14px; margin-top: 5px; font-weight: bold; display: none;"></div>
         </div>
 
         <div>
@@ -136,9 +130,7 @@
       <div style="max-width: 1000px; margin: auto">
         <h3>🐶 PetConecta</h3>
         <p>Conectando pets incríveis a lares amorosos 💕</p>
-        <p style="font-size: 14px">
-          © 2026 PetConecta. Todos os direitos reservados.
-        </p>
+        <p style="font-size: 14px">© 2026 PetConecta. Todos os direitos reservados.</p>
       </div>
     </footer>
 
@@ -146,6 +138,7 @@
       import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
       import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
       import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+      import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-storage.js";
 
       const firebaseConfig = {
         apiKey: "AIzaSyBpbc3GPkPHzN78cgXQsZWJ8ayzdiIdUYY",
@@ -159,10 +152,11 @@
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
       const auth = getAuth(app);
+      const storage = getStorage(app);
 
       let usuarioLogado = null;
 
-      // 🔐 Monitora o estado de Login e monta o menu de forma segura
+      // Monitora o estado de Login
       onAuthStateChanged(auth, (user) => {
         const menu = document.getElementById("menu");
         if (!menu) return;
@@ -179,7 +173,6 @@
           usuarioLogado = user;
           const nomeExibicao = user.displayName || user.email.split('@')[0];
           
-          // Exibe "Meus Pets" apenas se estiver logado
           menu.innerHTML = `
             ${linksBase}
             <li><a href="cadastrados.html">Meus Pets</a></li>
@@ -198,7 +191,6 @@
             });
           }
         } else {
-          // Se não estiver logado, bloqueia a página e redireciona
           localStorage.setItem("destinoAposLogin", "publicar.html");
           alert("Você precisa estar logado para cadastrar um pet.");
           window.location.href = "criar-conta.html";
@@ -278,10 +270,40 @@
           });
       });
 
+      // 🚀 ADICIONADO: Validação visual dinâmica no campo de upload de imagem
+      const inputImagem = document.getElementById("imagem");
+      const containerErro = document.getElementById("erro-imagem");
+
+      if (inputImagem) {
+        inputImagem.addEventListener("change", function () {
+          const arquivo = this.files[0];
+          containerErro.style.display = "none";
+          containerErro.textContent = "";
+
+          if (arquivo) {
+            // Validação de tipo (MIME-Type deve ser imagem)
+            if (!arquivo.type.startsWith("image/")) {
+              containerErro.textContent = "Erro: O arquivo selecionado precisa ser uma imagem válida.";
+              containerErro.style.display = "block";
+              this.value = ""; // Limpa a seleção
+              return;
+            }
+
+            // Validação de tamanho (5 MB = 5 * 1024 * 1024 bytes)
+            const limiteTamanho = 5 * 1024 * 1024;
+            if (arquivo.size > limiteTamanho) {
+              containerErro.textContent = "Erro: A imagem excede o tamanho limite de 5MB. Escolha uma foto menor.";
+              containerErro.style.display = "block";
+              this.value = ""; // Limpa a seleção
+            }
+          }
+        });
+      }
+
       // Processamento e Cadastro
       const form = document.getElementById("form-container");
       if (form) {
-        form.addEventListener("submit", function (e) {
+        form.addEventListener("submit", async function (e) {
           e.preventDefault();
 
           if (!usuarioLogado) {
@@ -305,20 +327,31 @@
             lat: parseFloat(document.getElementById("lat").value) || null,
             lng: parseFloat(document.getElementById("lng").value) || null,
             status: "desaparecido",
-            usuarioCriador: usuarioLogado.email // Usa o e-mail real da sessão ativa do Firebase
+            usuarioCriador: usuarioLogado.email
           };
 
           const imagemInput = document.getElementById("imagem").files[0];
-          if (imagemInput) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-              pet.imagem = e.target.result;
-              salvarPet(pet);
-            };
-            reader.readAsDataURL(imagemInput);
-          } else {
-            pet.imagem = "";
-            salvarPet(pet);
+
+          try {
+            if (imagemInput) {
+              // Upload seguro direto ao Storage
+              const nomeArquivo = `${Date.now()}_${imagemInput.name}`;
+              const storageRef = ref(storage, `pets/${nomeArquivo}`);
+
+              console.log("Iniciando upload da imagem...");
+              const snapshot = await uploadBytes(storageRef, imagemInput);
+              const downloadURL = await getDownloadURL(snapshot.ref);
+              
+              pet.imagem = downloadURL; // Salva o link encurtado no objeto do pet
+            } else {
+              pet.imagem = "";
+            }
+
+            await salvarPet(pet);
+
+          } catch (error) {
+            console.error("Erro no processamento de envio e cadastro:", error);
+            alert("Houve um erro ao processar o cadastro do pet ou upload da foto.");
           }
         });
       }
@@ -327,10 +360,10 @@
         try {
           await addDoc(collection(db, "pets"), pet);
           alert(`Pet cadastrado com sucesso!`);
-          window.location.href = "index.html"; // Redireciona para a Home onde ele já será listado reativamente!
+          window.location.href = "index.html"; 
         } catch (error) {
           console.error("Erro ao salvar no Firestore: ", error);
-          alert("Ocorreu um erro ao salvar o pet. Verifique se o Cloud Firestore foi inicializado no console.");
+          alert("Ocorreu um erro ao salvar o pet. Verifique as regras ou inicialização do banco.");
         }
       }
     </script>

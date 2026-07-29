@@ -38,7 +38,7 @@
         <!-- Conteúdo será inserido via JavaScript do Firebase -->
       </div>
 
-      <!-- NOVO: Formulário de Registro de Avistamentos (Surgirá reativamente se o pet estiver perdido) -->
+      <!-- Formulário de Registro de Avistamentos (Surgirá reativamente se o pet estiver perdido) -->
       <div class="detalhes-container" id="secao-avistamentos" style="margin-top: 30px; padding: 25px; display: none; box-sizing: border-box;">
         <h3 style="margin-top: 0; margin-bottom: 15px; color: #ff6600; font-family: 'Fredoka One', sans-serif;">⚠️ Viu este pet? Reporte um Avistamento!</h3>
         
@@ -150,7 +150,7 @@
 
     <!-- Script Modular do Firebase -->
     <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+      import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
       import { getFirestore, doc, getDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
       import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
@@ -164,7 +164,8 @@
         appId: "1:1030110038715:web:151deca61831138159b79e"
       };
 
-      const app = initializeApp(firebaseConfig);
+      // Inicialização segura
+      const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
       const db = getFirestore(app);
       const auth = getAuth(app);
 
@@ -187,9 +188,7 @@
           menu.innerHTML = `
             ${linksBase}
             <li><a href="cadastrados.html">Meus Pets</a></li>
-            <!-- Correção de contraste: tom creme do rodapé e alinhamento visual de menu -->
             <li style="display: inline-block; padding: 8px 12px; font-weight: bold; color: #ffe0cc;">Olá, ${nomeExibicao}!</li>
-            <!-- Correção de contraste: coral suave -->
             <li><a href="#" id="btn-logout" style="color: #ffccd5; font-weight: bold; text-decoration: none;">Sair</a></li>
           `;
 
@@ -227,7 +226,6 @@
         }
 
         try {
-          // Busca o documento específico usando o ID da URL diretamente do Firestore
           const docRef = doc(db, "pets", petId);
           const docSnap = await getDoc(docRef);
 
@@ -236,7 +234,6 @@
             const statusTexto = pet.status?.toUpperCase() || 'DESAPARECIDO';
             const statusColor = pet.status === 'encontrado' ? '#4CAF50' : '#ff6600';
 
-            // Revela a seção de avistamento reativamente apenas se o pet estiver "desaparecido" [1]
             if (pet.status === "desaparecido") {
               secaoAvistamentos.style.display = "block";
             }
@@ -252,15 +249,17 @@
                   <h2>${pet.nome || 'Sem nome'}</h2>
                   <p class="pet-description">${pet.descricao || "Sem descrição disponível."}</p>
 
+                  <!-- 🚀 ATUALIZADO: Grid agora possui Tipo (Espécie) e Porte do animal -->
                   <div class="pet-info-grid">
-                    <div><strong>Raça:</strong> ${pet.raca || pet.tipoPet || "Não informada"}</div>
+                    <div><strong>Tipo:</strong> ${pet.tipo || pet.raca || "Não informado"}</div>
+                    <div><strong>Porte:</strong> ${pet.porte || "Não informado"}</div>
                     <div><strong>Sexo:</strong> ${pet.sexo || "Indefinido"}</div>
                     <div><strong>Idade:</strong> ${pet.idade || "Não informada"}</div>
                     <div><strong>Localização:</strong> ${pet.localiza || pet.localizacao || "Não informada"}</div>
                     <div><strong>Data:</strong> ${pet.data || "Não informada"}</div>
                   </div>
 
-                  <p class="pet-contact" style="margin-top: 15px;"><strong>Contato:</strong> ${pet.contato || "Não informado"}</p>
+                  <p class="pet-contact" style="margin-top: 15px;"><strong>Contato (E-mail):</strong> ${pet.contato || "Não informado"}</p>
                   
                   ${pet.whatsapp ? `
                     <p class="pet-whatsapp" style="margin-top: 8px;">
@@ -293,7 +292,7 @@
         }
       }
 
-      // --- SALVAR AVISTAMENTO NA SUBCOLEÇÃO DO PET NO FIRESTORE ---
+      // --- SALVAR AVISTAMENTO ---
       const formAvistamento = document.getElementById("form-avistamento");
       const btnAvistamento = document.getElementById("btn-avistamento");
 
@@ -301,7 +300,6 @@
         formAvistamento.addEventListener("submit", async (e) => {
           e.preventDefault();
 
-          // Ativa o estado visual de "Loading" para evitar cliques múltiplos [2]
           btnAvistamento.disabled = true;
           btnAvistamento.textContent = "Registrando avistamento... 🐾";
 
@@ -310,10 +308,7 @@
           const contato = document.getElementById("avistamento-contato").value.trim();
 
           try {
-            // Cria uma nova referência na subcoleção: /pets/{petId}/avistamentos [1]
             const avistamentosRef = collection(db, "pets", petId, "avistamentos");
-            
-            // Grava o documento de avistamento na nuvem [1]
             await addDoc(avistamentosRef, {
               localAvistado: local,
               descricao: descricao,
@@ -327,7 +322,6 @@
             console.error("Erro ao registrar avistamento no Firestore:", error);
             alert("Não foi possível registrar o avistamento. Verifique sua conexão e tente novamente.");
           } finally {
-            // Desativa o loading e restaura o botão [2]
             btnAvistamento.disabled = false;
             btnAvistamento.textContent = "Registrar Avistamento 🐾";
           }
