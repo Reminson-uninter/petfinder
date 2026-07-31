@@ -16,7 +16,7 @@ const firebaseConfig = {
 // Inicialização segura do Firebase (evita conflitos com outros scripts)
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore(app);
-const storage = getStorage(app); // Inicializa o Storage para gerenciar as mídias
+const storage = getStorage(app);
 
 // Variável global na memória para guardar os pets ativos carregados do Firestore
 let listaPetsFirestore = [];
@@ -43,7 +43,7 @@ onSnapshot(collection(db, "pets"), (snapshot) => {
     };
   });
   
-  // 🚀 ADICIONADO: Ordenação local por data de desaparecimento recente (mais recentes primeiro)
+  // Ordenação local por data de desaparecimento recente (mais recentes primeiro)
   listaPetsFirestore.sort((a, b) => {
     const dataA = a.data ? new Date(a.data) : new Date(0);
     const dataB = b.data ? new Date(b.data) : new Date(0);
@@ -88,14 +88,12 @@ window.autenticarAcao = async function(acao, petId, usuarioCriador) {
     if (!confirm(`Deseja realmente excluir permanentemente o cadastro de ${pet.nome}?`)) return;
 
     try {
-      // 1. Deleta a imagem física do Cloud Storage se houver url válida [1]
       if (pet.imagem && pet.imagem.includes("firebasestorage.googleapis.com")) {
         console.log("Excluindo foto do Storage...");
         const refDoArquivo = storageRef(storage, pet.imagem);
         await deleteObject(refDoArquivo);
       }
 
-      // 2. Remove o documento do Firestore [2]
       console.log("Excluindo dados do Firestore...");
       await deleteDoc(firestoreDoc(db, "pets", petId));
       
@@ -110,18 +108,16 @@ window.autenticarAcao = async function(acao, petId, usuarioCriador) {
 
     try {
       await updateDoc(firestoreDoc(db, "pets", petId), { status: "encontrado" });
-      alert("Status updated successfully! Parabéns por encontrar seu pet.");
+      alert("Status atualizado com sucesso! Parabéns por encontrar seu pet.");
     } catch (error) {
       console.error("Erro ao atualizar status:", error);
       alert("Erro ao atualizar status.");
     }
   } 
   else if (acao === "editar") {
-    // 🚀 REDIRECIONAMENTO CORRIGIDO: Agora aponta para a página editar.html [2]
     window.location.href = `editar.html?id=${petId}`;
   }
 };
-
 
 window.exibirPets = function exibirPets() {
   const galeria = document.querySelector(".container-cards");
@@ -129,7 +125,6 @@ window.exibirPets = function exibirPets() {
 
   galeria.innerHTML = "";
 
-  // Agora lemos direto da nossa variável sincronizada com o Firebase
   const listaPets = listaPetsFirestore;
 
   // Filtros de texto/compatibilidade
@@ -230,7 +225,7 @@ window.exibirPets = function exibirPets() {
       <p><strong>Data:</strong> ${pet.data}</p>
       ${whatsappLink}
       <p><strong>Descrição:</strong> ${pet.descricao || "Não informada"}</p>
-      <div class="actions" style="display: flex; gap: 5px; margin-top: 10px;">
+      <div class="actions">
         ${actionsHTML}
       </div>
     `;
@@ -240,29 +235,19 @@ window.exibirPets = function exibirPets() {
     // Botão Saiba Mais
     const saibaMaisBtn = document.createElement('button');
     saibaMaisBtn.textContent = 'Saiba Mais';
-    saibaMaisBtn.className = 'btn-saiba-mais';
-    saibaMaisBtn.style.flex = '1';
-    saibaMaisBtn.style.borderRadius = '5px';
-    saibaMaisBtn.style.cursor = 'pointer';
-    saibaMaisBtn.style.fontSize = '10px';
+    saibaMaisBtn.className = 'btn btn-saiba-mais';
     saibaMaisBtn.addEventListener('click', () => {
       window.location.href = `detalhes.html?id=${pet.id}`;
     });
     actionsDiv.appendChild(saibaMaisBtn);
 
-    // 🚀 ADICIONADO: Botão "Compartilhar" para WhatsApp (Com correção de URL dinámica para subpastas do GitHub Pages)
+    // Botão Compartilhar WhatsApp
     const compartilharBtn = document.createElement('button');
     compartilharBtn.textContent = '📢 Compartilhar';
-    compartilharBtn.className = 'btn-compartilhar';
-    compartilharBtn.style.flex = '1';
+    compartilharBtn.className = 'btn btn-compartilhar';
     compartilharBtn.style.backgroundColor = '#25D366';
     compartilharBtn.style.color = '#fff';
-    compartilharBtn.style.border = 'none';
-    compartilharBtn.style.borderRadius = '5px';
-    compartilharBtn.style.cursor = 'pointer';
-    compartilharBtn.style.fontSize = '10px';
     compartilharBtn.addEventListener('click', () => {
-      // 🚀 CORREÇÃO DE DIRETÓRIO: Descobre a pasta atual dinamicamente (corrige o erro 404)
       const pastaBase = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
       const linkDetalhes = `${pastaBase}/detalhes.html?id=${pet.id}`;
       
@@ -280,14 +265,9 @@ window.exibirPets = function exibirPets() {
     if (ehCriador && pet.status !== 'encontrado') {
       const encontrouBtn = document.createElement('button');
       encontrouBtn.textContent = 'Encontrei';
-      encontrouBtn.className = 'btn-encontrou';
-      encontrouBtn.style.flex = '1';
+      encontrouBtn.className = 'btn btn-encontrou';
       encontrouBtn.style.backgroundColor = '#4CAF50';
       encontrouBtn.style.color = '#fff';
-      encontrouBtn.style.border = 'none';
-      encontrouBtn.style.borderRadius = '5px';
-      encontrouBtn.style.cursor = 'pointer';
-      encontrouBtn.style.fontSize = '10px';
       encontrouBtn.addEventListener('click', () => {
         window.autenticarAcao('encontrei', pet.id, pet.usuarioCriador);
       });
@@ -332,7 +312,6 @@ function configurarFiltrosDesaparecidos() {
   }
 }
 
-// Inicializações básicas
 function inicializar() {
   configurarBotaoCadastro();
   configurarFiltrosDesaparecidos();
